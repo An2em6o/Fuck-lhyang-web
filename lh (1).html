@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>赛博年度小丑大赏 —— 致“Lh杨”逆向封神记</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes glitch {
+      0% { transform: translate(0); text-shadow: -2px 2px #00ffea, 2px -2px #ff0055; }
+      25% { transform: translate(-3px, 2px); text-shadow: 3px -1px #00ffea, -3px 2px #ff0055; }
+      50% { transform: translate(2px, -2px); text-shadow: -2px 3px #00ffea, 2px -3px #ff0055; }
+      75% { transform: translate(-2px, -1px); text-shadow: 2px -2px #00ffea, -2px 1px #ff0055; }
+      100% { transform: translate(0); text-shadow: -2px 2px #00ffea, 2px -2px #ff0055; }
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 15px #ff0055, inset 0 0 15px #ff0055; }
+      50% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 35px #00ff66, inset 0 0 25px #00ff66; }
+      100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 15px #ff0055, inset 0 0 15px #ff0055; }
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes scanline {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(1000%); }
+    }
+    @keyframes clown-wobble {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-6deg) scale(1.04); }
+      75% { transform: rotate(6deg) scale(0.96); }
+    }
+    .glitch-text {
+      animation: glitch 1.8s infinite steps(2, start);
+    }
+    .clown-bounce {
+      animation: clown-wobble 3s infinite ease-in-out;
+    }
+    .neon-border-red {
+      box-shadow: 0 0 15px #ff003c, inset 0 0 15px #ff003c;
+    }
+    .neon-border-green {
+      box-shadow: 0 0 20px #00ff66, inset 0 0 10px #00ff66;
+    }
+    .neon-gold {
+      box-shadow: 0 0 25px #facc15, 0 0 10px #eab308;
+    }
+    .cyber-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(0, 255, 128, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 0, 128, 0.08) 1px, transparent 1px);
+    }
+    .danmaku-item {
+      position: fixed;
+      white-space: nowrap;
+      pointer-events: none;
+      font-weight: 900;
+      z-index: 9999;
+      animation: flyAcross 6s linear forwards;
+    }
+    @keyframes flyAcross {
+      0% { transform: translateX(100vw); opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateX(-120vw); opacity: 0; }
+    }
+    /* CRT Scanline Overlay */
+    .scanlines::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
+      z-index: 40;
+      background-size: 100% 3px, 4px 100%;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-[#07070d] text-gray-100 font-sans min-h-screen relative overflow-x-hidden selection:bg-pink-500 selection:text-white scanlines cyber-grid">
+
+  <!-- Matrix / Cyber Background Canvas -->
+  <canvas id="matrixCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-25"></canvas>
+
+  <!-- Top Warning Marquee -->
+  <div class="relative z-50 bg-gradient-to-r from-red-600 via-yellow-500 to-pink-600 text-black py-2.5 overflow-hidden font-black tracking-wider shadow-lg border-b-2 border-yellow-300">
+    <div class="flex whitespace-nowrap" style="animation: marquee 16s linear infinite;">
+      <span class="text-sm md:text-base mx-4">🚨 赛博重磅预警：2026年度“豆包逆向金小丑奖”得主强势出圈！</span>
+      <span class="text-sm md:text-base mx-4">🤡 逆向6-8款知名VelaJS快应用打着技术交流旗号！</span>
+      <span class="text-sm md:text-base mx-4">💥 交流群内向原作者光速骑脸开大！极度嚣张！</span>
+      <span class="text-sm md:text-base mx-4">⚠️ 豆包大模型受害协会发来贺电：代码全靠AI问，遇错汗流浃背！</span>
+      <!-- Duplicate for infinite seamless scroll -->
+      <span class="text-sm md:text-base mx-4">🚨 赛博重磅预警：2026年度“豆包逆向金小丑奖”得主强势出圈！</span>
+      <span class="text-sm md:text-base mx-4">🤡 逆向6-8款知名VelaJS快应用打着技术交流旗号！</span>
+      <span class="text-sm md:text-base mx-4">💥 交流群内向原作者光速骑脸开大！极度嚣张！</span>
+      <span class="text-sm md:text-base mx-4">⚠️ 豆包大模型受害协会发来贺电：代码全靠AI问，遇错汗流浃背！</span>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="relative z-10 max-w-6xl mx-auto px-4 py-8 md:py-14 space-y-16">
+
+    <!-- Hero Hall of Clown Header -->
+    <header class="text-center space-y-4">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-950/80 border border-red-500/60 text-red-400 font-mono text-xs md:text-sm animate-pulse">
+        <span class="w-2.5 h-2.5 rounded-full bg-red-500 inline-block shadow-[0_0_8px_#f43f5e]"></span>
+        社区避雷风云榜 · 特别公开处刑会
+      </div>
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-yellow-400 to-cyan-400 glitch-text drop-shadow-[0_5px_15px_rgba(255,0,128,0.4)]">
+        “Lh杨” 逆向封神大典
+      </h1>
+      <p class="text-gray-300 max-w-2xl mx-auto text-sm md:text-lg font-mono">
+        —— 敬【狂拆6-8个知名VelaJS快应用】且【亲自在群里骑脸嘲讽原作者】的赛博奇行种
+      </p>
+    </header>
+
+    <!-- Avatar Showcase Frame with Custom Interactive Upload -->
+    <section class="flex flex-col items-center justify-center relative">
+      <div class="relative group cursor-pointer" id="avatarContainer" title="点击或拖拽图片可替换头像">
+        <!-- Spinning Radar Ring -->
+        <div class="absolute -inset-4 rounded-full border-2 border-dashed border-cyan-400 animate-[spin_12s_linear_infinite] opacity-60"></div>
+        <div class="absolute -inset-8 rounded-full border border-pink-500 animate-[spin_18s_linear_infinite_reverse] opacity-40"></div>
+        <div class="absolute -inset-2 rounded-full bg-gradient-to-tr from-pink-600 via-purple-600 to-green-400 blur-xl opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
+
+        <!-- Inner Avatar Box -->
+        <div class="relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-yellow-400 bg-neutral-900 flex items-center justify-center shadow-2xl clown-bounce" id="avatarWrapper">
+          <!-- Default Clown Hacker Mask SVG -->
+          <svg id="defaultAvatarSvg" class="w-36 h-36 md:w-40 md:h-40" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="85" fill="#181824" stroke="#ff0055" stroke-width="4"/>
+            <!-- Clown Hair -->
+            <path d="M30 80C10 50 35 15 65 35C45 5 80 -5 95 20C115 -5 150 5 130 35C160 15 185 50 165 80" stroke="#00ff66" stroke-width="8" stroke-linecap="round"/>
+            <!-- Cyber Visor / Glasses -->
+            <rect x="45" y="75" width="110" height="30" rx="8" fill="#ff0055" fill-opacity="0.8"/>
+            <text x="52" y="96" fill="#00ff66" font-size="14" font-weight="900" font-family="monospace">DOUBAO_HACK</text>
+            <!-- Piercing Eyes -->
+            <circle cx="75" cy="90" r="5" fill="#fff"/>
+            <circle cx="125" cy="90" r="5" fill="#fff"/>
+            <!-- Clown Nose (Glowing Red) -->
+            <circle cx="100" cy="118" r="16" fill="#ff0000" stroke="#ffd700" stroke-width="3" filter="drop-shadow(0 0 8px #ff0000)"/>
+            <!-- Smirk Mouth -->
+            <path d="M60 145C80 175 120 175 140 145" stroke="#facc15" stroke-width="6" stroke-linecap="round"/>
+            <path d="M50 138L62 148M150 138L138 148" stroke="#ff0055" stroke-width="5" stroke-linecap="round"/>
+            <!-- Sweat Drop -->
+            <path d="M152 105C152 105 160 115 160 120C160 125 155 128 152 128C149 128 144 125 144 120C144 115 152 105 152 105Z" fill="#38bdf8"/>
+          </svg>
+          <!-- Uploaded Avatar Image Placeholder -->
+          <img id="customAvatarImg" src="" alt="Lh杨自定义头像" class="hidden w-full h-full object-cover rounded-full">
+          
+          <!-- Hover Overlay -->
+          <div class="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity p-2 text-center text-xs font-mono text-yellow-300">
+            <svg class="w-8 h-8 mb-1 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+            </svg>
+            <span>点击更换/拖入头像</span>
+            <span class="text-[10px] text-gray-400">已留好尊容圆位</span>
+          </div>
+        </div>
+
+        <input type="file" id="avatarFileInput" accept="image/*" class="hidden">
+      </div>
+
+      <!-- Identity Tag -->
+      <div class="mt-6 flex flex-col items-center gap-2">
+        <div class="inline-flex items-center gap-2 bg-yellow-400 text-black px-5 py-1.5 rounded-full font-black text-lg md:text-xl tracking-wider shadow-[0_0_20px_#facc15]">
+          <span>👑 逆向天尊：Lh杨 👑</span>
+        </div>
+        <p class="text-xs md:text-sm text-pink-400 font-mono">
+          [ 状态：正在群内光速骑脸 / 豆包正在生成代码... ]
+        </p>
+      </div>
+    </section>
+
+    <!-- Clown-O-Meter (小丑指数测量仪) -->
+    <section class="bg-neutral-900/90 border-2 border-pink-500 rounded-3xl p-6 md:p-8 neon-border-red backdrop-blur-md relative overflow-hidden">
+      <div class="absolute top-2 right-3 text-xs font-mono text-pink-500 flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-pink-500 animate-ping"></span>
+        实时量化监测仪 CLOWN-O-METER v9.9
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        <div class="md:col-span-1 space-y-2">
+          <h2 class="text-xl md:text-2xl font-black text-yellow-300 flex items-center gap-2">
+            <span>🤡 赛博小丑能级</span>
+          </h2>
+          <p class="text-gray-400 text-xs md:text-sm">
+            根据其“拆解快应用数”、“豆包提示词依赖度”及“贴脸开大无耻度”综合熔断计算。
+          </p>
+          <div class="pt-2">
+            <button id="boostMeterBtn" class="w-full bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 hover:from-red-500 hover:to-purple-500 text-white font-bold py-2.5 px-4 rounded-xl shadow-lg transform active:scale-95 transition text-sm flex items-center justify-center gap-2">
+              <span>🚀 注入更多逆向迷惑操作</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="md:col-span-2 space-y-4">
+          <div class="flex justify-between items-end">
+            <span class="font-mono text-xs md:text-sm text-cyan-400">熔断指数 (OVERLOAD)</span>
+            <span id="meterNumber" class="text-4xl md:text-5xl font-black text-red-500 font-mono tracking-tighter drop-shadow-[0_0_15px_#ff003c]">
+              99999%
+            </span>
+          </div>
+          <!-- Progress Bar Container -->
+          <div class="w-full h-7 bg-neutral-950 rounded-full border border-gray-700 p-1 relative overflow-hidden shadow-inner">
+            <div id="meterBar" class="h-full rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-red-600 shadow-[0_0_15px_#f43f5e] transition-all duration-700" style="width: 100%;">
+              <div class="w-full h-full bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,rgba(0,0,0,0.3)_10px,rgba(0,0,0,0.3)_20px)] animate-[pulse_2s_infinite]"></div>
+            </div>
+          </div>
+          <div class="flex justify-between text-[11px] font-mono text-gray-500">
+            <span>0% (正常人类)</span>
+            <span>200% (普通脚本小子)</span>
+            <span class="text-red-400 font-bold">99999%+ (Lh杨专用超维奇点)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Satirical Honorary Badges Wall (三大封号) -->
+    <section class="space-y-6">
+      <div class="text-center space-y-1">
+        <h2 class="text-3xl md:text-4xl font-black tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-yellow-300 to-pink-500">
+          🏆 荣誉加冕 · 终身恶名勋衔墙 🏆
+        </h2>
+        <p class="text-gray-400 text-xs md:text-sm font-mono">社区委员会一致全票通过并授予以下三项特级勋章</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Title 1: 豆包逆向大手子 -->
+        <div class="group bg-gradient-to-b from-neutral-900 to-[#120f1e] border-2 border-cyan-400/80 rounded-3xl p-6 relative hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.25)] flex flex-col justify-between">
+          <div class="absolute -top-3 left-6 px-3 py-0.5 bg-cyan-400 text-black text-xs font-black rounded-md tracking-wider">
+            FIRST CLASS
+          </div>
+          <div>
+            <div class="w-20 h-20 mx-auto my-3 flex items-center justify-center">
+              <!-- SVG Doubao Brain with Sweat & Prompt Console -->
+              <svg class="w-full h-full" viewBox="0 0 100 100" fill="none">
+                <rect x="10" y="15" width="80" height="70" rx="12" fill="#0f172a" stroke="#22d3ee" stroke-width="3"/>
+                <circle cx="50" cy="45" r="22" fill="#083344" stroke="#38bdf8" stroke-width="2"/>
+                <!-- AI Brain Waves -->
+                <path d="M40 45C40 38 45 35 50 35C55 35 60 38 60 45C60 52 50 55 50 60" stroke="#a5f3fc" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="50" cy="68" r="2.5" fill="#a5f3fc"/>
+                <!-- Huge Sweat Drops -->
+                <path d="M78 30C78 30 84 38 84 42C84 46 80 48 78 48C75 48 72 46 72 42C72 38 78 30 78 30Z" fill="#38bdf8" class="animate-bounce"/>
+                <text x="20" y="78" fill="#4ade80" font-size="8" font-family="monospace">&gt; 豆包帮我破一下</text>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-black text-center text-cyan-300 mt-2">豆包逆向大手子</h3>
+            <p class="text-xs text-center text-cyan-500 font-mono mb-4">Prompt Reverse Engineer Specialist</p>
+            <p class="text-gray-300 text-sm leading-relaxed border-t border-gray-800 pt-3">
+              遇事不决丢豆包，报错满屏心发焦。<br>
+              把大模型当做反编译神器，靠AI提示词硬凹代码。一旦脱壳失败立刻满头冷汗，被称为“全网最依赖AI擦屁股的脚本神仙”。
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-400">
+            <span>含金量: 负10000%</span>
+            <span class="text-cyan-400 font-mono">#硬核复制粘贴</span>
+          </div>
+        </div>
+
+        <!-- Title 2: 原神私服一哥 -->
+        <div class="group bg-gradient-to-b from-neutral-900 to-[#1e130f] border-2 border-yellow-400/80 rounded-3xl p-6 relative hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(250,204,21,0.25)] flex flex-col justify-between">
+          <div class="absolute -top-3 left-6 px-3 py-0.5 bg-yellow-400 text-black text-xs font-black rounded-md tracking-wider">
+            LEGENDARY
+          </div>
+          <div>
+            <div class="w-20 h-20 mx-auto my-3 flex items-center justify-center">
+              <!-- SVG Cracked Primogem + Pirate Hat -->
+              <svg class="w-full h-full" viewBox="0 0 100 100" fill="none">
+                <!-- Primogem shape -->
+                <polygon points="50,10 85,50 50,90 15,50" fill="#451a03" stroke="#facc15" stroke-width="4"/>
+                <polygon points="50,22 75,50 50,78 25,50" fill="#78350f"/>
+                <!-- Crack lines -->
+                <path d="M50 20L45 45L55 55L48 78" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+                <!-- Crown / Pirate symbol -->
+                <path d="M35 32L50 22L65 32L60 42L40 42Z" fill="#fbbf24"/>
+                <circle cx="50" cy="50" r="6" fill="#ef4444"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-black text-center text-yellow-300 mt-2">原神私服一哥</h3>
+            <p class="text-xs text-center text-yellow-500 font-mono mb-4">Teyvat Private Server Warlord</p>
+            <p class="text-gray-300 text-sm leading-relaxed border-t border-gray-800 pt-3">
+              在各大缝合怪私服群叱咤风云，以“魔改数据”、“一键刷原石”为荣。自以为掌控提瓦特底层代码，实则连快应用配置结构都没捋清楚。
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-400">
+            <span>提瓦特名气: 臭名昭著</span>
+            <span class="text-yellow-400 font-mono">#私服魔改狂魔</span>
+          </div>
+        </div>
+
+        <!-- Title 3: 幺幺 -->
+        <div class="group bg-gradient-to-b from-neutral-900 to-[#1e0f18] border-2 border-pink-500/80 rounded-3xl p-6 relative hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(244,63,94,0.25)] flex flex-col justify-between">
+          <div class="absolute -top-3 left-6 px-3 py-0.5 bg-pink-500 text-white text-xs font-black rounded-md tracking-wider">
+            EXCLUSIVE
+          </div>
+          <div>
+            <div class="w-20 h-20 mx-auto my-3 flex items-center justify-center">
+              <!-- SVG Cute Baby Pacifier + Broken Clown Horn -->
+              <svg class="w-full h-full" viewBox="0 0 100 100" fill="none">
+                <!-- Red Flower with Crying Clown Eyes -->
+                <circle cx="50" cy="50" r="30" fill="#831843" stroke="#f43f5e" stroke-width="4"/>
+                <!-- Petals -->
+                <circle cx="50" cy="16" r="12" fill="#ec4899" opacity="0.8"/>
+                <circle cx="50" cy="84" r="12" fill="#ec4899" opacity="0.8"/>
+                <circle cx="16" cy="50" r="12" fill="#ec4899" opacity="0.8"/>
+                <circle cx="84" cy="50" r="12" fill="#ec4899" opacity="0.8"/>
+                <!-- Sad clown mouth & baby cheeks -->
+                <circle cx="38" cy="46" r="4" fill="#fff"/>
+                <circle cx="62" cy="46" r="4" fill="#fff"/>
+                <path d="M40 62C45 55 55 55 60 62" stroke="#fb7185" stroke-width="3" stroke-linecap="round"/>
+                <text x="36" y="80" fill="#fde047" font-size="10" font-weight="bold">幺幺哒</text>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-black text-center text-pink-400 mt-2">幺 幺</h3>
+            <p class="text-xs text-center text-pink-500 font-mono mb-4">Baby Clown & Drama Queen</p>
+            <p class="text-gray-300 text-sm leading-relaxed border-t border-gray-800 pt-3">
+              被原创作者当面抓包对质时秒变楚楚可怜，在群里跳脚开大时又张牙舞爪。软硬兼施、撒泼打滚、经典“我弱我有理”，人送爱称“幺幺”。
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-400">
+            <span>群宠程度: 0人理睬</span>
+            <span class="text-pink-400 font-mono">#当场撒娇开大</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hall of Crimes / Feats (罪状大观楼) -->
+    <section class="bg-neutral-900/70 border border-red-500/40 rounded-3xl p-6 md:p-10 relative overflow-hidden backdrop-blur-md">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-800 pb-6 mb-8">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-black text-red-500 flex items-center gap-2">
+            <span>📂 极恶战绩：Lh杨三大典型暴行实录</span>
+          </h2>
+          <p class="text-xs md:text-sm text-gray-400 font-mono mt-1">证据确凿 · 铁证如山 · 赛博法庭全网公审</p>
+        </div>
+        <div class="px-4 py-1.5 rounded-lg bg-red-950 border border-red-600 text-red-300 text-xs font-mono self-start md:self-auto">
+          CASE NUMBER: #LH-YANG-666
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <!-- Crime 1 -->
+        <div class="flex flex-col sm:flex-row gap-4 p-5 rounded-2xl bg-neutral-950/80 border border-gray-800 hover:border-red-500/80 transition-colors">
+          <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-red-500/20 text-red-400 border border-red-500/40 flex items-center justify-center font-black text-xl font-mono">
+            01
+          </div>
+          <div class="space-y-1.5 flex-1">
+            <div class="flex flex-wrap items-center gap-2">
+              <h3 class="text-lg md:text-xl font-bold text-gray-100">批量狂拆 6-8 款 VelaJS 知名快应用</h3>
+              <span class="px-2 py-0.5 rounded text-[10px] bg-red-900/60 text-red-300 font-mono">无耻搬运</span>
+            </div>
+            <p class="text-gray-400 text-xs md:text-sm leading-relaxed">
+              专门盯准社区开发者辛勤耕耘的知名快应用生态，连夜拆包反编译 6 至 8 款成熟作品。打着“研究架构与技术学习”的冠冕堂皇大旗，实则把作者签名一抠、包名一改，光速打包据为己有。
+            </p>
+          </div>
+        </div>
+
+        <!-- Crime 2 -->
+        <div class="flex flex-col sm:flex-row gap-4 p-5 rounded-2xl bg-neutral-950/80 border border-gray-800 hover:border-yellow-500/80 transition-colors">
+          <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-yellow-500/20 text-yellow-400 border border-yellow-500/40 flex items-center justify-center font-black text-xl font-mono">
+            02
+          </div>
+          <div class="space-y-1.5 flex-1">
+            <div class="flex flex-wrap items-center gap-2">
+              <h3 class="text-lg md:text-xl font-bold text-gray-100">交流群内向原创开发者“贴脸开大”</h3>
+              <span class="px-2 py-0.5 rounded text-[10px] bg-yellow-900/60 text-yellow-300 font-mono">精神胜利法</span>
+            </div>
+            <p class="text-gray-400 text-xs md:text-sm leading-relaxed">
+              不仅毫无愧疚，更直接潜入官方开发者交流群。当着被侵权作者与全体群友的面，公然晒出解包战利品并开启猖狂嘲讽：“就这代码防不住我”、“有本事顺着网线来找我”，完美诠释何为狂妄小丑的终极形态。
+            </p>
+          </div>
+        </div>
+
+        <!-- Crime 3 -->
+        <div class="flex flex-col sm:flex-row gap-4 p-5 rounded-2xl bg-neutral-950/80 border border-gray-800 hover:border-cyan-500/80 transition-colors">
+          <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 flex items-center justify-center font-black text-xl font-mono">
+            03
+          </div>
+          <div class="space-y-1.5 flex-1">
+            <div class="flex flex-wrap items-center gap-2">
+              <h3 class="text-lg md:text-xl font-bold text-gray-100">全流程依托豆包大模型，遇混淆当场汗流浃背</h3>
+              <span class="px-2 py-0.5 rounded text-[10px] bg-cyan-900/60 text-cyan-300 font-mono">伪黑客真相</span>
+            </div>
+            <p class="text-gray-400 text-xs md:text-sm leading-relaxed">
+              号称逆向天花板，实则连变量作用域都没搞明白。遇到 AST 语法混淆或者基本加密函数，立马整段整段投喂给豆包等 AI 大模型。只要 AI 稍稍报错，大手子便在屏幕前手心冒汗、原地宕机。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Troll Console (赛博贴脸互动控制台) -->
+    <section class="bg-gradient-to-r from-neutral-900 via-purple-950/60 to-neutral-900 border-2 border-yellow-400/70 rounded-3xl p-6 md:p-8 relative neon-gold">
+      <div class="text-center space-y-2 mb-6">
+        <h2 class="text-2xl md:text-3xl font-black text-yellow-300">
+          🎮 互动开火台：给“大手子”送上来自社区的掌声
+        </h2>
+        <p class="text-xs md:text-sm text-gray-400">
+          点击下方按钮发射特制全屏嘲讽弹幕，体验与“Lh杨”同款的贴脸开大快感！
+        </p>
+      </div>
+
+      <!-- Action Buttons Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
+        <!-- Button 1: 贴脸开大弹幕 -->
+        <button id="btnDanmaku" class="bg-gradient-to-r from-pink-600 to-red-600 hover:from-pink-500 hover:to-red-500 text-white font-extrabold p-3 rounded-2xl shadow-lg active:scale-95 transition flex flex-col items-center justify-center gap-1.5 text-xs sm:text-sm">
+          <span class="text-2xl">💥</span>
+          <span>贴脸开大弹幕</span>
+        </button>
+
+        <!-- Button 2: 投喂赛博小丑鼻 -->
+        <button id="btnFeedNose" class="bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-extrabold p-3 rounded-2xl shadow-lg active:scale-95 transition flex flex-col items-center justify-center gap-1.5 text-xs sm:text-sm">
+          <span class="text-2xl">🔴</span>
+          <span>投喂小丑红鼻</span>
+        </button>
+
+        <!-- Button 3: 播放赛博嘘声/掌声 -->
+        <button id="btnSoundBoo" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold p-3 rounded-2xl shadow-lg active:scale-95 transition flex flex-col items-center justify-center gap-1.5 text-xs sm:text-sm">
+          <span class="text-2xl">🎺</span>
+          <span>奏响小丑号角</span>
+        </button>
+
+        <!-- Button 4: 赛博地震/屏幕故障 -->
+        <button id="btnGlitchShake" class="bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white font-extrabold p-3 rounded-2xl shadow-lg active:scale-95 transition flex flex-col items-center justify-center gap-1.5 text-xs sm:text-sm">
+          <span class="text-2xl">📳</span>
+          <span>激发汗流浃背</span>
+        </button>
+      </div>
+
+      <!-- Live Counter of community interactions -->
+      <div class="mt-6 flex flex-wrap items-center justify-around gap-4 text-xs font-mono text-gray-400 border-t border-gray-800/80 pt-4">
+        <div>已向大手子投喂小丑鼻: <span id="noseCount" class="text-red-400 font-bold">1337</span> 个</div>
+        <div>全网弹幕贴脸总计: <span id="barrageCount" class="text-pink-400 font-bold">8848</span> 次</div>
+        <div>豆包问答额度剩余: <span class="text-yellow-400 font-bold">0.00 Token</span></div>
+      </div>
+    </section>
+
+    <!-- Custom Notification / Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-32 transition-transform duration-300 bg-neutral-900 border-2 border-yellow-400 text-yellow-300 px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 font-mono text-xs md:text-sm pointer-events-none">
+      <span class="text-xl">📢</span>
+      <span id="toastMsg">操作已执行</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center space-y-3 pt-6 border-t border-gray-900 text-xs font-mono text-gray-500">
+      <p>💡 本页面受【社区反寄生协议】与【开源创作者正义同盟】全力支持</p>
+      <p>⚠️️ 尊重原创，坚决抵制任何把一键脱壳当技术、把贴脸嘲讽当荣耀的恶劣小丑行径！</p>
+    </footer>
+  </main>
+
+  <script>
+    /* ==============================================================
+       1. Matrix Background Animation (Canvas)
+       ============================================================== */
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const letters = '01LH_YANG_CLOWN_VELAJS_DOUBAO_REVERSE_99999_CRACK_';
+    const fontSize = 14;
+    let columns = Math.floor(canvas.width / fontSize);
+    let drops = Array(columns).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(7, 7, 13, 0.08)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#00ff66';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 40);
+
+    /* ==============================================================
+       2. Web Audio Synthesizer (Zero external audio files)
+       ============================================================== */
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    // Play Clown Horn Sound
+    function playClownHorn() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(440, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.1);
+        osc.frequency.exponentialRampToValueAtTime(350, now + 0.35);
+
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      } catch(e) {
+        console.error(e);
+      }
+    }
+
+    // Play Sarcastic Buzzer / Boing Sound
+    function playBuzzer() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.linearRampToValueAtTime(60, now + 0.4);
+
+        gain.gain.setValueAtTime(0.35, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.4);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.4);
+      } catch(e) {
+        console.error(e);
+      }
+    }
+
+    // Play Glitch Burst Sound
+    function playGlitchSound() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(600, now);
+        osc.frequency.setValueAtTime(120, now + 0.05);
+        osc.frequency.setValueAtTime(900, now + 0.1);
+        osc.frequency.setValueAtTime(200, now + 0.18);
+
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } catch(e) {
+        console.error(e);
+      }
+    }
+
+    /* ==============================================================
+       3. Dynamic Avatar Upload & Preview (预留圆形头像框)
+       ============================================================== */
+    const avatarContainer = document.getElementById('avatarContainer');
+    const avatarFileInput = document.getElementById('avatarFileInput');
+    const defaultAvatarSvg = document.getElementById('defaultAvatarSvg');
+    const customAvatarImg = document.getElementById('customAvatarImg');
+
+    avatarContainer.addEventListener('click', () => {
+      avatarFileInput.click();
+    });
+
+    avatarFileInput.addEventListener('change', function(e) {
+      if (this.files && this.files[0]) {
+        loadAvatarFile(this.files[0]);
+      }
+    });
+
+    // Drag and drop avatar handling
+    avatarContainer.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      avatarContainer.classList.add('scale-105');
+    });
+
+    avatarContainer.addEventListener('dragleave', () => {
+      avatarContainer.classList.remove('scale-105');
+    });
+
+    avatarContainer.addEventListener('drop', (e) => {
+      e.preventDefault();
+      avatarContainer.classList.remove('scale-105');
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        loadAvatarFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    function loadAvatarFile(file) {
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        customAvatarImg.src = evt.target.result;
+        customAvatarImg.classList.remove('hidden');
+        defaultAvatarSvg.classList.add('hidden');
+        showToast('🎉 头像更新成功！Lh杨的真容已被悬挂在光荣榜上！');
+        playClownHorn();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    /* ==============================================================
+       4. Clown-O-Meter Interactive Overload
+       ============================================================== */
+    let clownScore = 99999;
+    const meterNumber = document.getElementById('meterNumber');
+    const boostMeterBtn = document.getElementById('boostMeterBtn');
+
+    boostMeterBtn.addEventListener('click', () => {
+      clownScore += Math.floor(Math.random() * 50000) + 10000;
+      meterNumber.innerText = clownScore.toLocaleString() + '%';
+      meterNumber.classList.add('scale-125');
+      setTimeout(() => meterNumber.classList.remove('scale-125'), 200);
+      playBuzzer();
+      showToast('⚠️ 警告：检测到更多“豆包提示词”，小丑能级已发生宇宙级熔断！');
+    });
+
+    /* ==============================================================
+       5. Interactive Barrage (Danmaku) Engine
+       ============================================================== */
+    const sarcasticBarrages = [
+      '“我就破了6个快应用你怎么着？”',
+      '豆包：求求你放过我吧，我也不会解混淆啊！',
+      '快进到在原创作者脸上开大！',
+      '不会吧不会吧，真有人把一键脱壳当黑客技术啊？',
+      '提瓦特私服一哥亲临现场！',
+      '幺幺，别撒娇了，赶紧给开发者道个歉吧！',
+      '代码一报错，额头全是汗！',
+      '年度最佳逆向大手子：全靠Ctrl+C与豆包AI！',
+      '原作者正在提刀赶来的路上...',
+      '建议直接去快应用官方总群继续贴脸开大！',
+      '赛博小丑，名不虚传！',
+      '一键解包，偷梁换柱，叹为观止！'
+    ];
+
+    const danmakuColors = [
+      '#ff0055', '#00ff66', '#facc15', '#38bdf8', '#c084fc', '#fb923c'
+    ];
+
+    let barrageCounter = 8848;
+    const barrageCountEl = document.getElementById('barrageCount');
+
+    function fireDanmaku(customText) {
+      const text = customText || sarcasticBarrages[Math.floor(Math.random() * sarcasticBarrages.length)];
+      const el = document.createElement('div');
+      el.className = 'danmaku-item text-lg md:text-2xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]';
+      el.innerText = text;
+      
+      const randomTop = Math.floor(Math.random() * 75) + 12; // 12% to 87% from top
+      const randomColor = danmakuColors[Math.floor(Math.random() * danmakuColors.length)];
+      
+      el.style.top = randomTop + 'vh';
+      el.style.color = randomColor;
+      el.style.textShadow = `0 0 10px ${randomColor}`;
+
+      document.body.appendChild(el);
+
+      el.addEventListener('animationend', () => {
+        el.remove();
+      });
+
+      barrageCounter++;
+      barrageCountEl.innerText = barrageCounter;
+    }
+
+    // Spawn floating red clown noses on click
+    let noseCounter = 1337;
+    const noseCountEl = document.getElementById('noseCount');
+
+    function spawnClownNose() {
+      const nose = document.createElement('div');
+      nose.innerHTML = '🔴';
+      nose.style.position = 'fixed';
+      nose.style.left = (Math.random() * 80 + 10) + 'vw';
+      nose.style.top = (Math.random() * 70 + 15) + 'vh';
+      nose.style.fontSize = (Math.random() * 30 + 30) + 'px';
+      nose.style.zIndex = '9998';
+      nose.style.transition = 'all 1s ease-out';
+      nose.style.pointerEvents = 'none';
+      nose.style.filter = 'drop-shadow(0 0 12px red)';
+
+      document.body.appendChild(nose);
+
+      setTimeout(() => {
+        nose.style.transform = 'translateY(-120px) scale(1.6)';
+        nose.style.opacity = '0';
+      }, 50);
+
+      setTimeout(() => nose.remove(), 1100);
+
+      noseCounter++;
+      noseCountEl.innerText = noseCounter;
+    }
+
+    /* ==============================================================
+       6. Button Listeners & Glitch Trigger
+       ============================================================== */
+    const btnDanmaku = document.getElementById('btnDanmaku');
+    const btnFeedNose = document.getElementById('btnFeedNose');
+    const btnSoundBoo = document.getElementById('btnSoundBoo');
+    const btnGlitchShake = document.getElementById('btnGlitchShake');
+
+    btnDanmaku.addEventListener('click', () => {
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => fireDanmaku(), i * 180);
+      }
+      playGlitchSound();
+      showToast('🚀 弹幕暴风雨已在全屏贴脸释放！');
+    });
+
+    btnFeedNose.addEventListener('click', () => {
+      for(let i=0; i<4; i++) {
+        setTimeout(spawnClownNose, i * 100);
+      }
+      playClownHorn();
+      showToast('🤡 成功向“大手子”投喂了红亮的小丑鼻子！');
+    });
+
+    btnSoundBoo.addEventListener('click', () => {
+      playClownHorn();
+      setTimeout(playBuzzer, 200);
+      showToast('🎺 专属小丑号角响彻整个 VelaJS 开发者交流群！');
+    });
+
+    btnGlitchShake.addEventListener('click', () => {
+      document.body.classList.add('translate-x-2', 'filter', 'hue-rotate-90');
+      playGlitchSound();
+      setTimeout(() => {
+        document.body.classList.remove('translate-x-2', 'filter', 'hue-rotate-90');
+      }, 350);
+      showToast('💦 大手子看到不可混淆代码，当场满头大汗、屏幕震颤！');
+    });
+
+    // Toast Notification Utility
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    let toastTimeout = null;
+
+    function showToast(msg) {
+      toastMsg.innerText = msg;
+      toast.classList.remove('translate-y-32');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('translate-y-32');
+      }, 2600);
+    }
+
+    // Auto-fire occasional background danmaku
+    setInterval(() => {
+      if (Math.random() > 0.4) {
+        fireDanmaku();
+      }
+    }, 4500);
+  </script>
+</body>
+</html>
