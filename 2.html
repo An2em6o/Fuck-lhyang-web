@@ -1,0 +1,2023 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【年度特刊】提瓦特私服第一牢大 · Lh杨 (幺幺) 封神大典 & 节奏对决</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans+SC:wght@400;700;900&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --comic-red: #ff183c;
+            --comic-gold: #ffd200;
+            --comic-dark: #0e0717;
+            --comic-purple: #7928ca;
+            --comic-cyan: #00f0ff;
+            --comic-pink: #ff007f;
+            --ghost-green: #00ff88;
+            --ghost-dark: #07150c;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--comic-dark);
+            color: #ffffff;
+            overflow-x: hidden;
+            user-select: none;
+            transition: background-color 0.8s ease, filter 0.6s ease;
+        }
+
+        /* 极致阴间送葬模式 */
+        body.theme-underworld {
+            background-color: var(--ghost-dark);
+            filter: contrast(1.18) hue-rotate(115deg) brightness(0.95);
+        }
+
+        body.theme-underworld .halftone-bg {
+            background-image: radial-gradient(circle, rgba(0, 255, 136, 0.22) 16%, transparent 17%),
+                              radial-gradient(circle, rgba(160, 32, 240, 0.2) 16%, transparent 17%);
+        }
+
+        /* 漫画波普网点背景 */
+        .halftone-bg {
+            background-image: radial-gradient(circle, rgba(255, 210, 0, 0.14) 15%, transparent 16%),
+                              radial-gradient(circle, rgba(255, 24, 60, 0.14) 15%, transparent 16%);
+            background-size: 26px 26px;
+            background-position: 0 0, 13px 13px;
+        }
+
+        .font-bangers {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
+        }
+
+        .font-kuaile {
+            font-family: 'ZCOOL KuaiLe', cursive, sans-serif;
+        }
+
+        /* 3D 漫画大字报阴影 */
+        .comic-title-3d {
+            color: var(--comic-gold);
+            -webkit-text-stroke: 3.5px #000;
+            text-shadow: 
+                6px 6px 0px #ff183c,
+                11px 11px 0px #000,
+                16px 16px 25px rgba(255, 24, 60, 0.85);
+        }
+
+        .comic-subtitle-3d {
+            color: #ffffff;
+            -webkit-text-stroke: 2px #000;
+            text-shadow: 4px 4px 0px var(--comic-purple), 7px 7px 0px #000;
+        }
+
+        .comic-border-thick {
+            border: 4px solid #000000;
+            box-shadow: 7px 7px 0px #000000;
+        }
+
+        .comic-border-gold {
+            border: 4px solid #ffd200;
+            box-shadow: 0 0 30px rgba(255, 210, 0, 0.65), 6px 6px 0px #000;
+        }
+
+        /* 徽章金色炫光流光扫光 */
+        @keyframes gold-shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .badge-shimmer {
+            background: linear-gradient(110deg, #ffd200 20%, #ffffff 40%, #ffd200 60%);
+            background-size: 200% 100%;
+            animation: gold-shimmer 2.5s infinite linear;
+        }
+
+        /* 浮动晃动贴纸 */
+        @keyframes comic-float {
+            0%, 100% { transform: translateY(0px) rotate(var(--rot, 0deg)) scale(1); }
+            50% { transform: translateY(-8px) rotate(calc(var(--rot, 0deg) + 3deg)) scale(1.04); }
+        }
+        .animate-comic-float {
+            animation: comic-float 3s ease-in-out infinite;
+        }
+
+        /* 爆炸与振动动画 */
+        @keyframes pow-pop {
+            0% { transform: scale(0.2) rotate(-15deg); opacity: 0; }
+            50% { transform: scale(1.35) rotate(12deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        .animate-pow {
+            animation: pow-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes flame-pulse-anim {
+            0%, 100% { filter: drop-shadow(0 0 20px #ff183c) drop-shadow(0 0 40px #ffd200); }
+            50% { filter: drop-shadow(0 0 35px #ff7b00) drop-shadow(0 0 65px #ff183c); }
+        }
+        .flame-pulse {
+            animation: flame-pulse-anim 1.4s ease-in-out infinite;
+        }
+
+        @keyframes slap-shake {
+            0% { transform: translate(0, 0) rotate(0); }
+            20% { transform: translate(-18px, 14px) rotate(-4deg); }
+            40% { transform: translate(16px, -14px) rotate(4deg); }
+            60% { transform: translate(-10px, -10px) rotate(-2deg); }
+            80% { transform: translate(12px, 10px) rotate(3deg); }
+            100% { transform: translate(0, 0) rotate(0); }
+        }
+        .slap-active {
+            animation: slap-shake 0.24s ease-in-out;
+        }
+
+        /* 破防泪花动画 */
+        @keyframes tear-fall {
+            0% { transform: translateY(0) scaleY(0.8); opacity: 0.9; }
+            80% { transform: translateY(60px) scaleY(1.4); opacity: 1; }
+            100% { transform: translateY(90px) scaleY(0.5); opacity: 0; }
+        }
+        .tear-drop {
+            animation: tear-fall 1.2s infinite ease-in;
+        }
+
+        /* FEVER 狂暴头像疯狂抖动 */
+        @keyframes fever-avatar-shake {
+            0% { transform: scale(1.06) translate(0, 0) rotate(0); }
+            25% { transform: scale(1.12) translate(-10px, 8px) rotate(-8deg); }
+            50% { transform: scale(1.08) translate(10px, -8px) rotate(8deg); }
+            75% { transform: scale(1.14) translate(-8px, -5px) rotate(-5deg); }
+            100% { transform: scale(1.06) translate(0, 0) rotate(0); }
+        }
+        .fever-avatar {
+            animation: fever-avatar-shake 0.12s infinite linear !important;
+        }
+
+        .arcade-key-active {
+            transform: translateY(4px) scale(0.96) !important;
+            filter: brightness(1.6) !important;
+            box-shadow: 0 0 24px currentColor !important;
+        }
+
+        /* 赛博纸钱飘落 */
+        @keyframes paper-fall {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 0.95; }
+            100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+        }
+        .paper-coin {
+            position: fixed;
+            pointer-events: none;
+            z-index: 15;
+            animation: paper-fall linear forwards;
+        }
+
+        /* 弹幕滚动动画 */
+        @keyframes danmaku-move {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-150%); }
+        }
+        .danmaku-item {
+            position: absolute;
+            white-space: nowrap;
+            will-change: transform;
+            animation: danmaku-move linear infinite;
+        }
+    </style>
+</head>
+<body class="halftone-bg relative min-h-screen selection:bg-yellow-400 selection:text-black">
+
+    <!-- 漫画速度线 Canvas 背景 -->
+    <canvas id="speedLineCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- 全屏全自动飞掠弹幕容器 -->
+    <div id="danmakuContainer" class="fixed inset-0 pointer-events-none z-10 overflow-hidden"></div>
+
+    <!-- 顶部常驻：双模式音乐控制台、血条与频谱条 -->
+    <aside class="sticky top-0 z-40 bg-gradient-to-r from-red-700 via-yellow-500 to-purple-800 p-2 sm:p-3 border-b-4 border-black shadow-2xl transition-colors duration-500" id="topHeaderBar">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+            
+            <!-- 音乐与音效控制区 -->
+            <div class="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
+                <span class="bg-black text-yellow-300 font-bangers text-lg px-2.5 py-0.5 rounded border-2 border-yellow-400 tracking-wider flex items-center gap-1.5 shadow-[2px_2px_0px_#000]">
+                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-green-400 animate-ping"></span>
+                    BGM LIVE
+                </span>
+                
+                <!-- 切换【🔥 超燃史诗处刑曲】与【👻 极致阴间送葬曲】 -->
+                <button id="btnToggleMusicStyle" class="bg-black text-yellow-400 hover:text-white px-3.5 py-1.5 rounded-xl border-2 border-black font-kuaile font-black text-xs sm:text-sm shadow-[3px_3px_0px_#000] flex items-center gap-1.5 transition-all hover:scale-105 active:scale-95">
+                    <span id="musicStyleIcon" class="text-base">🔥</span>
+                    <span id="musicStyleText">风格：超燃史诗处刑曲 [点击切阴间]</span>
+                </button>
+
+                <button id="btnToggleBgmPlay" class="bg-red-600 hover:bg-red-500 text-white px-2.5 py-1.5 rounded-xl border-2 border-black font-kuaile font-bold text-xs shadow-[2px_2px_0px_#000] flex items-center gap-1">
+                    <span id="bgmPlayIcon">🔊</span>
+                    <span id="bgmPlayText">静音</span>
+                </button>
+
+                <!-- 激光眼开关 -->
+                <button id="btnToggleLaser" class="bg-purple-900 hover:bg-purple-800 text-yellow-300 px-2.5 py-1.5 rounded-xl border-2 border-black font-kuaile font-bold text-xs shadow-[2px_2px_0px_#000] flex items-center gap-1">
+                    <span>⚡ 激光眼</span>
+                </button>
+            </div>
+
+            <!-- 音游玩家护盾生命值条 (快应用源码护盾) -->
+            <div class="w-full md:w-64 flex items-center gap-2">
+                <span class="text-xs font-black text-black whitespace-nowrap flex items-center gap-1">
+                    <span>🛡️ 源码护盾:</span>
+                </span>
+                <div class="relative w-full h-5 bg-black rounded-full overflow-hidden border-2 border-black p-0.5">
+                    <div id="playerShieldFill" class="h-full bg-gradient-to-r from-cyan-400 via-green-400 to-yellow-300 rounded-full w-full transition-all duration-200"></div>
+                    <span id="playerShieldText" class="absolute inset-0 flex items-center justify-center text-[10px] font-mono font-black text-white drop-shadow">
+                        100% (安全)
+                    </span>
+                </div>
+            </div>
+
+            <!-- Boss HP 状态条 -->
+            <div class="w-full md:w-64 flex items-center gap-2">
+                <span class="text-xs font-black text-black whitespace-nowrap">🤡 脸皮HP:</span>
+                <div class="relative w-full h-5 bg-black rounded-full overflow-hidden border-2 border-black p-0.5">
+                    <div id="bossHpFill" class="h-full bg-gradient-to-r from-yellow-300 via-red-500 to-pink-600 rounded-full w-full transition-all duration-200"></div>
+                    <span id="bossHpText" class="absolute inset-0 flex items-center justify-center text-[10px] font-mono font-black text-white drop-shadow">
+                        999999999 HP
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 顶部实时霓虹音频频谱动画柱 -->
+        <div id="visualizerContainer" class="max-w-6xl mx-auto flex items-end justify-between gap-1 h-3 mt-1.5 px-2 overflow-hidden opacity-85">
+            <!-- 由 JS 动态填充 32 根频谱柱 -->
+        </div>
+    </aside>
+
+    <!-- 首次未激活时全屏温馨提示横条 (点击网页任意位置均可启动音频) -->
+    <div id="audioUnlockPrompt" class="bg-yellow-400 text-black border-b-2 border-black text-center py-1 font-kuaile font-black text-xs sm:text-sm tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-md">
+        <span>⚡ [音乐正在准备自动播放中] 点击屏幕任意位置即刻释放超燃音频！</span>
+    </div>
+    <main class="relative z-10 container mx-auto px-4 pt-4 pb-28 max-w-5xl">
+
+        <!-- 漫画大标题区 -->
+        <header class="text-center my-4 relative">
+            
+            <!-- 悬浮晃动的漫画拟声贴纸 -->
+            <div class="absolute -left-2 top-0 hidden lg:block bg-yellow-300 text-black border-4 border-black p-2 rounded-2xl font-bangers text-3xl shadow-[5px_5px_0px_#000] animate-comic-float" style="--rot: -12deg;">
+                BOOM!
+            </div>
+            <div class="absolute -right-2 top-0 hidden lg:block bg-red-600 text-yellow-200 border-4 border-black p-2 rounded-2xl font-bangers text-3xl shadow-[5px_5px_0px_#000] animate-comic-float" style="--rot: 14deg;">
+                CRACK!
+            </div>
+
+            <div class="inline-block transform -rotate-2 bg-red-600 text-yellow-200 border-4 border-black px-6 py-2 rounded-2xl shadow-[6px_6px_0px_#000] mb-3" id="bannerTag">
+                <span class="font-kuaile font-black text-lg sm:text-2xl tracking-widest">
+                    💥 提瓦特私服白嫖盛典 · 史诗级翻车通缉令 💥
+                </span>
+            </div>
+
+            <h1 id="mainHeroTitle" class="comic-title-3d font-black text-5xl sm:text-7xl lg:text-9xl tracking-tighter uppercase leading-none py-1">
+                小丑之王 · 降临
+            </h1>
+
+            <div class="comic-subtitle-3d font-kuaile font-bold text-2xl sm:text-4xl text-yellow-300 tracking-wide mt-2">
+                恭贺 <span class="bg-yellow-400 text-red-600 px-3 py-1 rounded-xl border-3 border-black inline-block transform rotate-2">【Lh杨 / 幺幺】</span> 斩获逆向界至高耻辱桂冠
+            </div>
+        </header>
+
+        <!-- 核心展台：六星原魔 · 小丑神龛 (Avatar Shrine，可替换头像、火焰、泪花、激光眼) -->
+        <section class="my-8 flex flex-col items-center">
+            <div class="relative group cursor-pointer" id="avatarInteractArea" title="点击可狠狠抽耳光，或拖拽图片换上他的尊容！">
+
+                <!-- 背后烈焰粒子光环 SVG -->
+                <div class="absolute -inset-10 flex items-center justify-center pointer-events-none flame-pulse" id="avatarHalo">
+                    <svg class="w-80 h-80 sm:w-96 sm:h-96 text-yellow-400" viewBox="0 0 200 200" fill="currentColor">
+                        <polygon points="100,0 120,70 190,50 140,100 190,150 120,130 100,200 80,130 10,150 60,100 10,50 80,70" opacity="0.6"/>
+                    </svg>
+                </div>
+
+                <!-- 金色桂冠 SVG (悬浮于头像上方，动态浮动) -->
+                <div id="avatarCrown" class="absolute -top-12 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none w-28 sm:w-36 drop-shadow-[0_5px_15px_rgba(255,210,0,0.9)] animate-bounce" style="animation-duration: 2s;">
+                    <svg viewBox="0 0 100 60" fill="none" class="w-full">
+                        <path d="M10 50 L20 20 L40 38 L50 10 L60 38 L80 20 L90 50 Z" fill="#ffd200" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
+                        <circle cx="20" cy="20" r="4" fill="#ff183c" stroke="#000" stroke-width="2"/>
+                        <circle cx="50" cy="10" r="5" fill="#00f0ff" stroke="#000" stroke-width="2"/>
+                        <circle cx="80" cy="20" r="4" fill="#ff183c" stroke="#000" stroke-width="2"/>
+                        <rect x="15" y="45" width="70" height="7" rx="3" fill="#ff7b00" stroke="#000" stroke-width="2"/>
+                    </svg>
+                </div>
+
+                <!-- 圆形头像主体 -->
+                <div id="avatarContainer" class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-8 border-yellow-400 bg-gradient-to-b from-purple-900 via-red-950 to-black shadow-[0_0_50px_rgba(255,24,60,0.8)] z-10 flex flex-col items-center justify-center transition-transform">
+                    
+                    <img id="avatarImg" src="" alt="Lh杨" class="hidden w-full h-full object-cover">
+
+                    <div id="avatarPlaceholder" class="flex flex-col items-center justify-center p-3 text-center">
+                        <svg class="w-28 h-28 sm:w-36 sm:h-36 text-yellow-300 transform transition-transform group-hover:scale-110" viewBox="0 0 120 120" fill="none">
+                            <circle cx="60" cy="60" r="50" fill="#fff" stroke="#000" stroke-width="5"/>
+                            <polygon points="40,32 44,45 57,45 46,53 50,65 40,57 30,65 34,53 23,45 36,45" fill="#00f0ff" stroke="#000" stroke-width="2"/>
+                            <polygon points="80,32 84,45 97,45 86,53 90,65 80,57 70,65 74,53 63,45 76,45" fill="#00f0ff" stroke="#000" stroke-width="2"/>
+                            <circle cx="60" cy="65" r="14" fill="#ff183c" stroke="#000" stroke-width="4"/>
+                            <path d="M30 82 Q60 110 90 82" stroke="#ff183c" stroke-width="8" stroke-linecap="round" fill="none"/>
+                            <path d="M30 82 Q60 110 90 82" stroke="#000" stroke-width="3" stroke-linecap="round" fill="none"/>
+                        </svg>
+                        <div class="mt-2 bg-yellow-400 text-black font-black text-xs px-3 py-1 rounded-full border-2 border-black">
+                            【点击/拖入：换上Lh杨尊容】
+                        </div>
+                    </div>
+
+                    <!-- 动态破防瀑布泪花 (左右两侧) -->
+                    <div class="absolute left-16 top-28 w-2.5 h-6 bg-cyan-300 rounded-full tear-drop pointer-events-none opacity-80"></div>
+                    <div class="absolute right-16 top-28 w-2.5 h-6 bg-cyan-300 rounded-full tear-drop pointer-events-none opacity-80" style="animation-delay: 0.4s;"></div>
+
+                    <!-- 激光眼射线 (按开关触发) -->
+                    <div id="laserEyeLeft" class="absolute left-20 top-24 w-1 hidden h-96 bg-red-500 shadow-[0_0_15px_#ff0000] pointer-events-none origin-top transform -rotate-45"></div>
+                    <div id="laserEyeRight" class="absolute right-20 top-24 w-1 hidden h-96 bg-red-500 shadow-[0_0_15px_#ff0000] pointer-events-none origin-top transform rotate-45"></div>
+
+                    <input type="file" id="avatarFileInput" accept="image/*" class="hidden">
+
+                    <div id="avatarStatusBadge" class="absolute bottom-2 bg-red-600 text-yellow-200 border-2 border-black text-[11px] font-black px-3 py-0.5 rounded-full font-mono">
+                        STATUS: 待制裁中
+                    </div>
+                </div>
+
+                <!-- 拟声贴纸 -->
+                <div class="absolute -right-6 top-8 sm:-right-12 sm:top-12 z-20 bg-yellow-300 text-black border-4 border-black p-2 sm:p-3 rounded-2xl font-bangers text-xl sm:text-2xl transform rotate-12 shadow-[4px_4px_0px_#000] pointer-events-none animate-bounce">
+                    POW!
+                </div>
+                <div class="absolute -left-6 bottom-8 sm:-left-12 sm:bottom-12 z-20 bg-red-500 text-white border-4 border-black p-2 sm:p-3 rounded-2xl font-kuaile font-black text-sm sm:text-base transform -rotate-12 shadow-[4px_4px_0px_#000] pointer-events-none">
+                    “豆包救我!”
+                </div>
+            </div>
+
+            <!-- 人物身份大横幅 -->
+            <div class="mt-6 text-center">
+                <div class="inline-flex items-center gap-3 bg-black text-white px-8 py-3 rounded-3xl border-4 border-yellow-400 shadow-[8px_8px_0px_#ff183c]">
+                    <span class="font-black text-3xl sm:text-5xl text-yellow-400 tracking-wider font-kuaile">
+                        Lh杨
+                    </span>
+                    <span class="bg-red-600 text-white font-black text-lg sm:text-2xl px-3 py-1 rounded-xl border-2 border-black transform -rotate-3">
+                        别名：幺幺
+                    </span>
+                </div>
+                <p class="text-yellow-300 font-bold text-sm sm:text-base mt-2 drop-shadow">
+                    核心绝技：【全自动代码窃取】 · 独家天赋：【受害群内贴脸开大】
+                </p>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             🌟 核心玩法：【正义保卫战 · 暴打幺幺】节奏音游 (平缓下落、沉浸感拉满)
+             ========================================================================== -->
+        <section class="my-12 bg-gradient-to-b from-slate-950 via-purple-950 to-black border-4 border-yellow-400 rounded-3xl p-4 sm:p-8 comic-border-thick relative overflow-hidden shadow-[0_0_60px_rgba(255,210,0,0.4)]">
+            
+            <div class="flex flex-col md:flex-row items-center justify-between pb-4 border-b-4 border-yellow-400/80 gap-4">
+                <div class="flex items-center gap-3 text-center md:text-left">
+                    <span class="text-4xl sm:text-5xl animate-spin" style="animation-duration: 4s;">💿</span>
+                    <div>
+                        <div class="flex items-center justify-center md:justify-start gap-2">
+                            <h2 class="font-bangers text-3xl sm:text-4xl text-yellow-300 tracking-widest drop-shadow-[2px_2px_0px_#ff183c]">
+                                CLOWN RHYTHM BEAT
+                            </h2>
+                            <span class="bg-emerald-600 text-white font-mono text-xs font-black px-2 py-0.5 rounded border border-black uppercase">
+                                4-Key Casual
+                            </span>
+                        </div>
+                        <p class="font-kuaile text-sm sm:text-base text-yellow-200 mt-0.5">
+                            【保卫快应用 · 节奏暴打】下落平缓好跟拍！踩准节奏，守卫源码护盾，别让小丑得逞！
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 游戏控制按钮组 -->
+                <div class="flex items-center gap-3 w-full md:w-auto justify-center">
+                    <button id="btnStartGame" class="flex-1 md:flex-none bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-black font-kuaile font-black text-lg sm:text-xl px-6 py-3 rounded-2xl border-3 border-black shadow-[4px_4px_0px_#000] hover:scale-105 active:scale-95 transition-transform flex items-center justify-center gap-2">
+                        <span id="gameStartIcon">⚡</span>
+                        <span id="gameStartText">开始保卫战 (START)</span>
+                    </button>
+                    <button id="btnResetGame" class="bg-slate-800 hover:bg-slate-700 text-yellow-300 font-kuaile font-bold text-sm px-4 py-3 rounded-2xl border-2 border-yellow-400 shadow-[3px_3px_0px_#000] active:scale-95 transition-all">
+                        重置
+                    </button>
+                </div>
+            </div>
+
+            <!-- 音游实时 HUD 仪表盘 -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 my-4 bg-black/70 p-3 sm:p-4 rounded-2xl border-2 border-yellow-400/40 font-mono">
+                <div class="text-center border-r border-slate-700/60 last:border-none">
+                    <span class="text-[10px] sm:text-xs text-slate-400 block font-sans font-bold">TOTAL SCORE</span>
+                    <span id="gameScoreDisplay" class="font-bangers text-2xl sm:text-3xl text-yellow-400 tracking-wider">000000</span>
+                </div>
+                <div class="text-center border-r border-slate-700/60 last:border-none">
+                    <span class="text-[10px] sm:text-xs text-slate-400 block font-sans font-bold">COMBO</span>
+                    <span id="gameComboDisplay" class="font-bangers text-2xl sm:text-3xl text-cyan-400 tracking-wider">0</span>
+                </div>
+                <div class="text-center border-r border-slate-700/60 last:border-none">
+                    <span class="text-[10px] sm:text-xs text-slate-400 block font-sans font-bold">ACCURACY</span>
+                    <span id="gameAccDisplay" class="font-bangers text-2xl sm:text-3xl text-pink-400 tracking-wider">100.0%</span>
+                </div>
+                <div class="text-center">
+                    <div class="flex items-center justify-between text-[10px] sm:text-xs text-yellow-300 font-sans font-bold px-1">
+                        <span>FEVER GAUGE</span>
+                        <span id="feverText">0%</span>
+                    </div>
+                    <div class="relative w-full h-4 bg-slate-900 rounded-full overflow-hidden border border-yellow-400/80 mt-1">
+                        <div id="feverBarFill" class="h-full bg-gradient-to-r from-yellow-400 via-pink-500 to-red-500 w-0 transition-all duration-150 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 音游下落画布 Canvas 区域 -->
+            <div class="relative w-full max-w-2xl mx-auto h-[380px] sm:h-[440px] bg-black/90 rounded-2xl border-4 border-black overflow-hidden shadow-inner flex flex-col justify-between">
+                <canvas id="rhythmCanvas" class="absolute inset-0 w-full h-full z-10"></canvas>
+
+                <!-- FEVER 全屏黄金辉光提示层 -->
+                <div id="feverOverlay" class="absolute inset-0 pointer-events-none z-20 bg-yellow-400/10 border-4 border-yellow-300 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="font-bangers text-4xl sm:text-6xl text-yellow-300 drop-shadow-[0_0_20px_#ff183c] tracking-widest animate-pulse">
+                        FEVER MODE! 2X SCORE!
+                    </span>
+                </div>
+
+                <!-- 浮动判定字展示容器 -->
+                <div id="judgeFeedbackContainer" class="absolute top-1/3 left-1/2 transform -translate-x-1/2 pointer-events-none z-30 flex flex-col items-center">
+                    <div id="judgeText" class="font-bangers text-4xl sm:text-5xl tracking-widest transition-transform duration-100 scale-0"></div>
+                </div>
+            </div>
+
+            <!-- 底部 4 键街机实体触控大按键 (PC 对应 D, F, J, K / 移动端点按) -->
+            <div class="max-w-2xl mx-auto grid grid-cols-4 gap-2 sm:gap-3 mt-4">
+                <button data-lane="0" class="arcade-key bg-slate-900 hover:bg-slate-800 text-cyan-400 border-3 border-cyan-400 rounded-2xl p-2 sm:p-3 text-center shadow-[0_5px_0px_#008b99] active:translate-y-1 transition-all">
+                    <div class="font-bangers text-2xl sm:text-4xl leading-none">D</div>
+                    <div class="text-[10px] sm:text-xs font-black text-white truncate mt-1">📁 快应用盾</div>
+                </button>
+                <button data-lane="1" class="arcade-key bg-slate-900 hover:bg-slate-800 text-yellow-300 border-3 border-yellow-400 rounded-2xl p-2 sm:p-3 text-center shadow-[0_5px_0px_#b39200] active:translate-y-1 transition-all">
+                    <div class="font-bangers text-2xl sm:text-4xl leading-none">F</div>
+                    <div class="text-[10px] sm:text-xs font-black text-white truncate mt-1">🤖 豆包截断</div>
+                </button>
+                <button data-lane="2" class="arcade-key bg-slate-900 hover:bg-slate-800 text-pink-400 border-3 border-pink-500 rounded-2xl p-2 sm:p-3 text-center shadow-[0_5px_0px_#b30059] active:translate-y-1 transition-all">
+                    <div class="font-bangers text-2xl sm:text-4xl leading-none">J</div>
+                    <div class="text-[10px] sm:text-xs font-black text-white truncate mt-1">🤡 反向抽脸</div>
+                </button>
+                <button data-lane="3" class="arcade-key bg-slate-900 hover:bg-slate-800 text-red-500 border-3 border-red-500 rounded-2xl p-2 sm:p-3 text-center shadow-[0_5px_0px_#99001a] active:translate-y-1 transition-all">
+                    <div class="font-bangers text-2xl sm:text-4xl leading-none">K</div>
+                    <div class="text-[10px] sm:text-xs font-black text-white truncate mt-1">🎮 私服炸服</div>
+                </button>
+            </div>
+            
+            <div class="text-center mt-3 text-xs text-slate-400 font-mono">
+                🎵 键位指引：敲击 <kbd class="bg-black text-yellow-400 px-1.5 py-0.5 rounded border border-yellow-400">D</kbd> <kbd class="bg-black text-yellow-400 px-1.5 py-0.5 rounded border border-yellow-400">F</kbd> <kbd class="bg-black text-yellow-400 px-1.5 py-0.5 rounded border border-yellow-400">J</kbd> <kbd class="bg-black text-yellow-400 px-1.5 py-0.5 rounded border border-yellow-400">K</kbd> 或触摸按键。判定宽松，命中回补护盾，护盾归零则源码失守！
+            </div>
+        </section>
+
+        <!-- 三大至尊封号漫画勋章 (流光动效与弹跳) -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 my-10">
+            <!-- 勋章 1: 豆包逆向大手子 -->
+            <article class="relative bg-gradient-to-b from-yellow-300 via-amber-400 to-amber-500 text-black rounded-3xl p-6 comic-border-thick transform hover:-translate-y-2 hover:rotate-1 transition-all badge-shimmer">
+                <div class="absolute -top-5 left-6 bg-black text-yellow-300 font-bangers text-base px-3 py-0.5 rounded-lg border-2 border-yellow-400">
+                    AWARD #01
+                </div>
+                <div class="flex items-center justify-between mt-2 mb-3">
+                    <span class="text-5xl animate-bounce" style="animation-duration: 2.2s;">🤖🥄</span>
+                    <span class="bg-black text-white font-mono text-xs font-black px-2 py-1 rounded">AI喂饭级</span>
+                </div>
+                <h3 class="font-kuaile font-black text-2xl sm:text-3xl text-red-600 mb-2 leading-tight">
+                    【豆包逆向大手子】
+                </h3>
+                <p class="text-slate-900 font-bold text-sm leading-relaxed">
+                    生平绝技：将 VelaJS 打包混淆代码整段投喂给豆包——“豆包帮我换个作者名字”、“豆包这报错怎么忽悠过去？” 一旦AI断网，当场失去代码自理能力！
+                </p>
+                <div class="mt-4 pt-3 border-t-2 border-black/30 font-black text-xs text-red-800 flex justify-between">
+                    <span>实装战力：纯Prompt搬运工</span>
+                    <span>含金量：0%</span>
+                </div>
+            </article>
+
+            <!-- 勋章 2: 原神私服一哥 -->
+            <article class="relative bg-gradient-to-b from-purple-300 via-pink-300 to-red-400 text-black rounded-3xl p-6 comic-border-thick transform hover:-translate-y-2 hover:-rotate-1 transition-all badge-shimmer">
+                <div class="absolute -top-5 left-6 bg-purple-900 text-purple-200 font-bangers text-base px-3 py-0.5 rounded-lg border-2 border-purple-400">
+                    AWARD #02
+                </div>
+                <div class="flex items-center justify-between mt-2 mb-3">
+                    <span class="text-5xl animate-bounce" style="animation-duration: 1.8s;">👑🤡</span>
+                    <span class="bg-red-600 text-white font-mono text-xs font-black px-2 py-1 rounded">私服大霸王</span>
+                </div>
+                <h3 class="font-kuaile font-black text-2xl sm:text-3xl text-purple-950 mb-2 leading-tight">
+                    【原神私服一哥】
+                </h3>
+                <p class="text-slate-900 font-bold text-sm leading-relaxed">
+                    在魔改单机私服里刷无限原石产生了“天神下凡”的幻觉。跑来现实社区对独立开发者的劳动成果指手画脚，误以为真实代码生态也能靠修改本地存档一键称霸。
+                </p>
+                <div class="mt-4 pt-3 border-t-2 border-black/30 font-black text-xs text-purple-950 flex justify-between">
+                    <span>私服地位：称王称霸</span>
+                    <span>现实生态：人人喊打</span>
+                </div>
+            </article>
+
+            <!-- 勋章 3: 幺幺 -->
+            <article class="relative bg-gradient-to-b from-red-400 via-rose-500 to-red-600 text-white rounded-3xl p-6 comic-border-thick transform hover:-translate-y-2 hover:rotate-2 transition-all badge-shimmer">
+                <div class="absolute -top-5 left-6 bg-yellow-400 text-black font-bangers text-base px-3 py-0.5 rounded-lg border-2 border-black">
+                    AWARD #03
+                </div>
+                <div class="flex items-center justify-between mt-2 mb-3">
+                    <span class="text-5xl animate-bounce" style="animation-duration: 2.5s;">📢🎪</span>
+                    <span class="bg-yellow-400 text-black font-mono text-xs font-black px-2 py-1 rounded">贴脸艺术家</span>
+                </div>
+                <h3 class="font-kuaile font-black text-2xl sm:text-3xl text-yellow-300 mb-2 leading-tight">
+                    【幺幺】
+                </h3>
+                <p class="text-red-50 font-bold text-sm leading-relaxed">
+                    前无古人后无来者的“贴脸开大”神仙操作！偷了作者6-8款快应用之后，堂而皇之加入官方作者群，在受害开发者面前极速跳脸、疯狂嘲弄，刷新人类心理素质天花板！
+                </p>
+                <div class="mt-4 pt-3 border-t-2 border-black/30 font-black text-xs text-yellow-300 flex justify-between">
+                    <span>脸皮厚度：超新星爆发</span>
+                    <span>武德：完全归零</span>
+                </div>
+            </article>
+        </section>
+
+        <!-- 核心互动专区：耳光正义制裁 & 提瓦特限定池祈愿 -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 my-10">
+            <!-- 交互板块 1: 狂抽耳光正义制裁 -->
+            <div class="bg-gradient-to-br from-yellow-400 to-orange-500 text-black rounded-3xl p-6 comic-border-thick flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between pb-3 border-b-3 border-black">
+                        <h3 class="font-kuaile font-black text-2xl sm:text-3xl text-red-700 flex items-center gap-2">
+                            <span>👋 当面正义制裁 · 狂抽耳光</span>
+                        </h3>
+                        <span class="bg-black text-yellow-300 font-mono text-xs font-bold px-2 py-1 rounded">COMIC SLAP</span>
+                    </div>
+                    <p class="font-bold text-sm text-slate-900 mt-3 leading-relaxed">
+                        受够了他在群里的嚣张嘴脸？请尽情挥动你的正义之手！每一次重击都会产生漫画爆炸拟声字并削减他的嚣张气焰！
+                    </p>
+                </div>
+
+                <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/70 p-4 rounded-2xl border-3 border-black">
+                    <div>
+                        <div class="text-xs font-black text-slate-700 uppercase">累计受制裁巴掌数</div>
+                        <div id="slapCountDisplay" class="font-bangers text-4xl sm:text-5xl text-red-600 tracking-wider">
+                            0
+                        </div>
+                    </div>
+                    <button id="btnSlap" class="w-full sm:w-auto bg-red-600 hover:bg-red-500 text-white font-kuaile font-black text-xl px-8 py-3.5 rounded-2xl border-3 border-black shadow-[4px_4px_0px_#000] active:scale-90 transition-all flex items-center justify-center gap-2">
+                        <span>💥 狠狠抽他一记！</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 交互板块 2: 提瓦特十连抽 (限定牢大UP池) -->
+            <div class="bg-gradient-to-br from-purple-700 to-indigo-900 text-white rounded-3xl p-6 comic-border-gold flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between pb-3 border-b-2 border-purple-400">
+                        <div class="flex items-center gap-2">
+                            <span class="text-3xl">🌠</span>
+                            <h3 class="font-kuaile font-black text-2xl sm:text-3xl text-yellow-300">
+                                提瓦特十连祈愿：限定牢大UP池
+                            </h3>
+                        </div>
+                        <span class="bg-yellow-400 text-black font-mono text-xs font-black px-2 py-1 rounded">UP 100%</span>
+                    </div>
+                    <p class="text-sm text-purple-200 mt-3 leading-relaxed">
+                        消耗 1600 赛博原石，召唤当季限定五星角色【0.5★ 盗包魔王·幺幺】及专属圣遗物【豆包的施舍草稿】！
+                    </p>
+                </div>
+
+                <div class="mt-6">
+                    <button id="btnGacha" class="w-full bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 text-black font-kuaile font-black text-xl py-3.5 px-6 rounded-2xl border-3 border-black shadow-[4px_4px_0px_#000] hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+                        <span>✨ 倾家荡产！来发金色十连祈愿！</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 恶劣罪状公审漫画分镜 -->
+        <section class="my-12">
+            <div class="text-center mb-8">
+                <h2 class="font-kuaile font-black text-3xl sm:text-5xl text-yellow-300 tracking-wider drop-shadow-[3px_3px_0px_#ff183c]">
+                    ⚖️ 赛博公审分镜：三大恶劣行径揭露
+                </h2>
+                <p class="text-slate-400 text-sm mt-2 font-mono">证据链确凿 · 钉死在开源生态的耻辱柱上</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-black/80 border-4 border-yellow-400 rounded-3xl p-5 relative overflow-hidden shadow-[6px_6px_0px_#000]">
+                    <div class="absolute -right-3 -top-3 w-16 h-16 bg-red-600 rounded-full flex items-center justify-center font-bangers text-2xl text-yellow-300 border-2 border-black rotate-12">
+                        NO.1
+                    </div>
+                    <div class="text-3xl mb-2">📦🔓</div>
+                    <h3 class="font-kuaile font-black text-xl text-yellow-300 mb-2">
+                        疯狂盗用 6-8 个快应用
+                    </h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        独立作者为了生态挑灯夜战开发的 VelaJS 快应用，被其利用工具暴力拆包、粗糙篡改作者署名，打上自己的Logo冒充原创发布，行径极其下作。
+                    </p>
+                    <div class="mt-4 bg-yellow-950/60 border border-yellow-500/50 p-2 rounded-xl text-xs text-yellow-300 font-mono">
+                        恶劣指数：★★★★★
+                    </div>
+                </div>
+
+                <div class="bg-black/80 border-4 border-red-500 rounded-3xl p-5 relative overflow-hidden shadow-[6px_6px_0px_#000]">
+                    <div class="absolute -right-3 -top-3 w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center font-bangers text-2xl text-black border-2 border-black -rotate-12">
+                        NO.2
+                    </div>
+                    <div class="text-3xl mb-2">🗣️💥</div>
+                    <h3 class="font-kuaile font-black text-xl text-red-400 mb-2">
+                        受害群内“贴脸开大”跳脸
+                    </h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        偷完代码非但不夹起尾巴，反倒潜入核心交流群，在被盗作者面前极尽挑衅嘲讽之能事，把偷窃当荣耀，把白嫖当本领，嘴脸丑陋至极。
+                    </p>
+                    <div class="mt-4 bg-red-950/60 border border-red-500/50 p-2 rounded-xl text-xs text-red-300 font-mono">
+                        恶劣指数：★★★★★★ (爆表)
+                    </div>
+                </div>
+
+                <div class="bg-black/80 border-4 border-purple-500 rounded-3xl p-5 relative overflow-hidden shadow-[6px_6px_0px_#000]">
+                    <div class="absolute -right-3 -top-3 w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center font-bangers text-2xl text-white border-2 border-black rotate-6">
+                        NO.3
+                    </div>
+                    <div class="text-3xl mb-2">🤖🍼</div>
+                    <h3 class="font-kuaile font-black text-xl text-purple-300 mb-2">
+                        全靠豆包当爹逆向
+                    </h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        自诩“逆向技术流”，实际离开豆包连 JS 变量作用域都摸不透。代码跑不通就向AI发脾气，本质上只是一个连基础语法都欠奉的现代代码搬运文盲。
+                    </p>
+                    <div class="mt-4 bg-purple-950/60 border border-purple-500/50 p-2 rounded-xl text-xs text-purple-300 font-mono">
+                        恶劣指数：★★★★★
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 豆包提词器机密日志卡 -->
+        <section class="bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-200 text-black border-4 border-black rounded-3xl p-6 sm:p-8 my-10 shadow-[8px_8px_0px_#ff183c]">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-4xl">📜</span>
+                <div>
+                    <h3 class="font-kuaile font-black text-2xl sm:text-3xl text-red-700">
+                        【机密泄露】Lh杨与豆包AI的深夜偷家对话
+                    </h3>
+                    <p class="text-xs sm:text-sm font-bold text-slate-800">还原当代“逆向大手子”最真实的技术底裤</p>
+                </div>
+            </div>
+
+            <div class="space-y-3 font-mono text-xs sm:text-sm">
+                <div class="bg-white/80 p-3 rounded-2xl border-2 border-black flex gap-3">
+                    <span class="font-black text-red-600 whitespace-nowrap">Lh杨:</span>
+                    <span class="font-bold">“豆包！快！这个VelaJS的快应用我偷下来了，你帮我把所有原作者的名字改成Lh杨，不要让我写一行代码，听到没有？！”</span>
+                </div>
+                <div class="bg-purple-100 p-3 rounded-2xl border-2 border-black flex gap-3">
+                    <span class="font-black text-purple-700 whitespace-nowrap">豆包AI:</span>
+                    <span class="font-bold text-slate-700">“检测到您的操作涉嫌侵犯开发者权益，且您的语法基础为零，建议回去重新学习基础 JavaScript 呢親。”</span>
+                </div>
+                <div class="bg-white/80 p-3 rounded-2xl border-2 border-black flex gap-3">
+                    <span class="font-black text-red-600 whitespace-nowrap">Lh杨:</span>
+                    <span class="font-bold">“我不管！我还要拿着这个去群里嘲讽作者呢！你不给我改，我就在原神私服里给你差评！”</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================================================
+         💀 核心失败弹窗：你的作品被破解了（悲） + 8-bit 复古失败音效
+         ========================================================================== -->
+    <div id="gameOverModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden flex flex-col items-center justify-center p-4">
+        <div class="relative bg-gradient-to-b from-red-950 via-slate-900 to-black border-4 border-red-500 rounded-3xl max-w-lg w-full p-6 sm:p-8 text-center shadow-[0_0_80px_rgba(255,24,60,0.9)] animate-pow">
+            
+            <div class="inline-block bg-red-600 text-white font-bangers text-xl px-4 py-1 rounded-full border-2 border-black mb-3">
+                GAME OVER · SOURCE LEAKED
+            </div>
+            
+            <!-- 核心文案大字报 -->
+            <h3 class="font-kuaile font-black text-4xl sm:text-5xl text-red-500 tracking-wider drop-shadow-[3px_3px_0px_#000]">
+                你的作品被破解了（悲）
+            </h3>
+
+            <div class="my-4 p-4 bg-black/80 rounded-2xl border-2 border-red-500/50 text-left space-y-2">
+                <p class="font-bold text-sm text-yellow-300">
+                    💥 <span class="text-white">恶劣现场：</span>源码护盾归零！Lh杨已使用豆包AI一键批量替换作者名！
+                </p>
+                <p class="font-bold text-xs text-slate-300">
+                    🤡 并在官方开发者群内贴脸反向开大：<br>
+                    <span class="text-pink-400 font-mono">“就这混淆防护？豆包三秒钟就给我喂完饭了，多谢款待啊！”</span>
+                </p>
+                <p class="text-[11px] font-mono text-red-400">
+                    ⚠️ 战报损失：6-8 款 VelaJS 快应用被粗暴转存至某提瓦特私服网盘...
+                </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
+                <button id="btnRetryGame" class="w-full sm:w-auto bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-black font-kuaile font-black text-lg px-8 py-3 rounded-2xl border-3 border-black shadow-[4px_4px_0px_#000] hover:scale-105 active:scale-95 transition-all">
+                    🛡️ 重新守家 (再抽他丫的！)
+                </button>
+                <button id="btnCloseGameOver" class="w-full sm:w-auto bg-slate-800 text-slate-300 hover:text-white font-kuaile text-sm px-5 py-3 rounded-2xl border-2 border-slate-600">
+                    含泪接受
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 正常结算战报弹窗 -->
+    <div id="rhythmResultModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex flex-col items-center justify-center p-4">
+        <div class="relative bg-gradient-to-b from-purple-950 via-slate-900 to-black border-4 border-yellow-400 rounded-3xl max-w-lg w-full p-6 sm:p-8 text-center shadow-[0_0_80px_rgba(255,210,0,0.8)] animate-pow">
+            
+            <div class="inline-block bg-red-600 text-yellow-300 font-bangers text-xl px-4 py-1 rounded-full border-2 border-black mb-3">
+                BATTLE REPORT
+            </div>
+            
+            <h3 class="font-kuaile font-black text-3xl sm:text-4xl text-yellow-300">
+                提瓦特制裁小丑战报
+            </h3>
+
+            <div class="my-4">
+                <div id="resultRankStamp" class="font-bangers text-7xl sm:text-8xl text-yellow-400 drop-shadow-[5px_5px_0px_#ff183c] transform -rotate-6">
+                    SSS
+                </div>
+                <div id="resultRankTitle" class="font-kuaile font-black text-xl text-pink-400 mt-1">
+                    【提瓦特开源守护战神】
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 bg-black/80 p-4 rounded-2xl border-2 border-yellow-400/50 font-mono text-sm my-4 text-left">
+                <div>
+                    <span class="text-slate-400 block text-xs">总暴打得分:</span>
+                    <span id="resultScore" class="text-yellow-400 font-bold text-lg">0</span>
+                </div>
+                <div>
+                    <span class="text-slate-400 block text-xs">最大连击:</span>
+                    <span id="resultMaxCombo" class="text-cyan-400 font-bold text-lg">0</span>
+                </div>
+                <div>
+                    <span class="text-slate-400 block text-xs">制裁准度:</span>
+                    <span id="resultAcc" class="text-pink-400 font-bold text-lg">0%</span>
+                </div>
+                <div>
+                    <span class="text-slate-400 block text-xs">源码护盾剩余:</span>
+                    <span id="resultRemainShield" class="text-green-400 font-bold text-lg">100%</span>
+                </div>
+            </div>
+
+            <p id="resultComment" class="text-sm font-bold text-yellow-200 font-sans my-3">
+                “您的节拍如狂风骤雨！Lh杨被打得连夜删库，原神私服当场炸服！”
+            </p>
+
+            <button id="closeRhythmResultBtn" class="bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-kuaile font-black text-lg px-8 py-3 rounded-2xl border-3 border-black shadow-[4px_4px_0px_#000] hover:scale-105 active:scale-95 transition-all">
+                收下正义胜利
+            </button>
+        </div>
+    </div>
+
+    <!-- 祈愿抽卡结果全屏弹窗 -->
+    <div id="gachaModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex flex-col items-center justify-center p-4">
+        <div id="meteorAnimLayer" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+        <div class="relative bg-gradient-to-b from-purple-950 to-black border-4 border-yellow-400 rounded-3xl max-w-3xl w-full p-6 sm:p-8 text-center shadow-[0_0_60px_rgba(255,210,0,0.8)] animate-pow">
+            <h3 class="font-kuaile font-black text-3xl sm:text-4xl text-yellow-300 drop-shadow">
+                🎉 祈愿大获成功！金光炸裂！
+            </h3>
+            <p class="text-sm font-bold text-purple-300 mt-1">恭喜您捕获了 10 件【年度小丑全套珍品】！</p>
+
+            <div id="gachaCardsGrid" class="grid grid-cols-2 sm:grid-cols-5 gap-3 my-6"></div>
+
+            <button id="closeGachaBtn" class="bg-yellow-400 text-black font-kuaile font-black text-lg px-8 py-2.5 rounded-2xl border-3 border-black shadow-[4px_4px_0px_#000] hover:bg-yellow-300 active:scale-95 transition-all">
+                收下这堆小丑废料
+            </button>
+        </div>
+    </div>
+
+    <!-- 弹脸耳光与拟声词容器 -->
+    <div id="slapFxContainer" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
+
+    <script>
+        class DualThemeAudioEngine {
+            constructor() {
+                this.ctx = null;
+                this.isPlaying = false;
+                this.isMuted = false;
+                this.currentMode = 'epic'; // 'epic' (130 BPM) | 'spooky' (65 BPM)
+                this.tempo = 130;
+                this.step = 0;
+                this.timer = null;
+                this.masterGain = null;
+                this.bgmGain = null;
+                this.analyser = null;
+                this.visualizerData = new Uint8Array(32);
+                this.beatCallback = null;
+            }
+
+            init() {
+                if (!this.ctx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioContext();
+                    
+                    this.masterGain = this.ctx.createGain();
+                    this.masterGain.gain.setValueAtTime(0.48, this.ctx.currentTime);
+                    this.masterGain.connect(this.ctx.destination);
+
+                    this.analyser = this.ctx.createAnalyser();
+                    this.analyser.fftSize = 64;
+                    this.masterGain.connect(this.analyser);
+
+                    this.bgmGain = this.ctx.createGain();
+                    this.bgmGain.gain.setValueAtTime(0.38, this.ctx.currentTime);
+                    this.bgmGain.connect(this.masterGain);
+                }
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            }
+
+            toggleMute() {
+                this.isMuted = !this.isMuted;
+                if (this.masterGain) {
+                    this.masterGain.gain.setValueAtTime(this.isMuted ? 0 : 0.48, this.ctx.currentTime);
+                }
+                return this.isMuted;
+            }
+
+            setMode(mode) {
+                this.currentMode = mode;
+                this.tempo = (mode === 'epic') ? 130 : 65;
+            }
+
+            /* --- 超燃史诗处刑乐乐器合成 --- */
+            playEpicKick(time) {
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(170, time);
+                osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.28);
+
+                gain.gain.setValueAtTime(1.3, time);
+                gain.gain.exponentialRampToValueAtTime(0.01, time + 0.28);
+
+                osc.connect(gain);
+                gain.connect(this.bgmGain);
+                osc.start(time);
+                osc.stop(time + 0.28);
+            }
+
+            playEpicSnare(time) {
+                const bufferSize = this.ctx.sampleRate * 0.18;
+                const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+
+                const noise = this.ctx.createBufferSource();
+                noise.buffer = buffer;
+                const filter = this.ctx.createBiquadFilter();
+                filter.type = 'highpass';
+                filter.frequency.value = 1100;
+
+                const gain = this.ctx.createGain();
+                gain.gain.setValueAtTime(0.65, time);
+                gain.gain.exponentialRampToValueAtTime(0.01, time + 0.18);
+
+                noise.connect(filter);
+                filter.connect(gain);
+                gain.connect(this.bgmGain);
+                noise.start(time);
+                noise.stop(time + 0.18);
+            }
+
+            playEpicBass(freq, time, dur = 0.16) {
+                const osc = this.ctx.createOscillator();
+                const filter = this.ctx.createBiquadFilter();
+                const gain = this.ctx.createGain();
+
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(freq, time);
+
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(900, time);
+                filter.frequency.exponentialRampToValueAtTime(2600, time + dur * 0.5);
+                filter.frequency.exponentialRampToValueAtTime(220, time + dur);
+
+                gain.gain.setValueAtTime(0.48, time);
+                gain.gain.exponentialRampToValueAtTime(0.01, time + dur);
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(this.bgmGain);
+                osc.start(time);
+                osc.stop(time + dur);
+            }
+
+            /* --- 极致阴间送葬乐乐器合成 (金属青铜磬钟、低沉阴风鬼鸣、哀怨唢呐) --- */
+            playFuneralBell(time) {
+                [432, 648, 876, 1296].forEach((f, idx) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(f + (Math.random() * 4 - 2), time);
+
+                    const amp = 0.3 / (idx + 1);
+                    gain.gain.setValueAtTime(amp, time);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, time + 3.2);
+
+                    osc.connect(gain);
+                    gain.connect(this.bgmGain);
+                    osc.start(time);
+                    osc.stop(time + 3.2);
+                });
+            }
+
+            playGhostDrone(time, dur = 1.4) {
+                const osc1 = this.ctx.createOscillator();
+                const osc2 = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+
+                osc1.type = 'sine';
+                osc2.type = 'sine';
+                osc1.frequency.setValueAtTime(55, time);
+                osc2.frequency.setValueAtTime(57.8, time);
+
+                gain.gain.setValueAtTime(0.01, time);
+                gain.gain.linearRampToValueAtTime(0.38, time + dur * 0.4);
+                gain.gain.exponentialRampToValueAtTime(0.001, time + dur);
+
+                osc1.connect(gain);
+                osc2.connect(gain);
+                gain.connect(this.bgmGain);
+                osc1.start(time);
+                osc2.start(time);
+                osc1.stop(time + dur);
+                osc2.stop(time + dur);
+            }
+
+            playSuonaWeep(freq, time, dur = 0.5) {
+                const osc = this.ctx.createOscillator();
+                const lfo = this.ctx.createOscillator();
+                const lfoGain = this.ctx.createGain();
+                const filter = this.ctx.createBiquadFilter();
+                const gain = this.ctx.createGain();
+
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(freq, time);
+                osc.frequency.exponentialRampToValueAtTime(freq * 1.08, time + dur * 0.6);
+                osc.frequency.exponentialRampToValueAtTime(freq * 0.92, time + dur);
+
+                lfo.frequency.setValueAtTime(7.5, time);
+                lfoGain.gain.setValueAtTime(16, time);
+                lfo.connect(lfoGain);
+                lfoGain.connect(osc.frequency);
+
+                filter.type = 'bandpass';
+                filter.frequency.setValueAtTime(1300, time);
+                filter.Q.value = 4.2;
+
+                gain.gain.setValueAtTime(0.01, time);
+                gain.gain.linearRampToValueAtTime(0.34, time + 0.08);
+                gain.gain.exponentialRampToValueAtTime(0.001, time + dur);
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(this.bgmGain);
+
+                lfo.start(time);
+                osc.start(time);
+                lfo.stop(time + dur);
+                osc.stop(time + dur);
+            }
+
+            /* --- 经典 8-bit 下行音阶碎裂失败音效 --- */
+            play8BitGameOver() {
+                this.init();
+                const now = this.ctx.currentTime;
+                const pitches = [311.13, 293.66, 277.18, 261.63, 130.81];
+                const noteDur = 0.17;
+
+                pitches.forEach((freq, i) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+
+                    osc.type = (i === pitches.length - 1) ? 'sawtooth' : 'square';
+                    const startTime = now + i * noteDur;
+
+                    osc.frequency.setValueAtTime(freq, startTime);
+                    if (i === pitches.length - 1) {
+                        osc.frequency.exponentialRampToValueAtTime(35, startTime + 0.65);
+                    }
+
+                    gain.gain.setValueAtTime(0.38, startTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + (i === pitches.length - 1 ? 0.65 : noteDur * 0.95));
+
+                    osc.connect(gain);
+                    gain.connect(this.masterGain);
+                    osc.start(startTime);
+                    osc.stop(startTime + (i === pitches.length - 1 ? 0.65 : noteDur));
+                });
+            }
+
+            playHitPerfect() {
+                this.init();
+                const now = this.ctx.currentTime;
+                [960, 1440, 1920].forEach((freq) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, now);
+                    gain.gain.setValueAtTime(0.26, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+                    osc.connect(gain);
+                    gain.connect(this.masterGain);
+                    osc.start(now);
+                    osc.stop(now + 0.18);
+                });
+            }
+
+            playHitGreat() {
+                this.init();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(380, now);
+                osc.frequency.exponentialRampToValueAtTime(70, now + 0.13);
+                gain.gain.setValueAtTime(0.42, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.13);
+                osc.connect(gain);
+                gain.connect(this.masterGain);
+                osc.start(now);
+                osc.stop(now + 0.13);
+            }
+
+            playHitMiss() {
+                this.init();
+                const now = this.ctx.currentTime;
+                [165, 172].forEach(freq => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(freq, now);
+                    gain.gain.setValueAtTime(0.35, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.22);
+                    osc.connect(gain);
+                    gain.connect(this.masterGain);
+                    osc.start(now);
+                    osc.stop(now + 0.22);
+                });
+            }
+
+            playSlapSfx() {
+                this.init();
+                const now = this.ctx.currentTime;
+                const bufferSize = this.ctx.sampleRate * 0.16;
+                const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.3));
+                const noise = this.ctx.createBufferSource();
+                noise.buffer = buffer;
+                const gain = this.ctx.createGain();
+                gain.gain.setValueAtTime(1.5, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.16);
+                noise.connect(gain);
+                gain.connect(this.masterGain);
+                noise.start(now);
+                noise.stop(now + 0.16);
+            }
+
+            playGachaGoldSfx() {
+                this.init();
+                const now = this.ctx.currentTime;
+                const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
+                notes.forEach((freq, idx) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+                    gain.gain.setValueAtTime(0.38, now + idx * 0.08);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.08 + 0.45);
+                    osc.connect(gain);
+                    gain.connect(this.masterGain);
+                    osc.start(now + idx * 0.08);
+                    osc.stop(now + idx * 0.08 + 0.45);
+                });
+            }
+
+            startBgm(onBeatCallback) {
+                this.init();
+                if (onBeatCallback) this.beatCallback = onBeatCallback;
+                if (this.isPlaying) return;
+                this.isPlaying = true;
+
+                let nextTime = this.ctx.currentTime + 0.05;
+                const epicBass = [55, 55, 65.41, 73.42, 82.41, 73.42, 65.41, 55];
+                const spookyScale = [440, 466.16, 523.25, 587.33, 622.25, 698.46];
+
+                const schedule = () => {
+                    const stepDuration = (60 / this.tempo) / 4;
+                    while (nextTime < this.ctx.currentTime + 0.25) {
+                        const s = this.step % 16;
+
+                        if (this.currentMode === 'epic') {
+                            if (s === 0 || s === 4 || s === 8 || s === 12) this.playEpicKick(nextTime);
+                            if (s === 4 || s === 12) this.playEpicSnare(nextTime);
+                            if (s % 2 === 0) {
+                                const bFreq = epicBass[(Math.floor(this.step / 4) + s) % epicBass.length];
+                                this.playEpicBass(bFreq, nextTime, stepDuration * 1.6);
+                            }
+                        } else {
+                            if (s === 0 && (this.step % 32 === 0)) this.playFuneralBell(nextTime);
+                            if (s === 0 || s === 8) this.playGhostDrone(nextTime, stepDuration * 8);
+                            if (s === 4 || s === 12) {
+                                const sFreq = spookyScale[(Math.floor(this.step / 2)) % spookyScale.length];
+                                this.playSuonaWeep(sFreq, nextTime, stepDuration * 3.5);
+                            }
+                        }
+
+                        if (this.beatCallback && s % 4 === 0) {
+                            this.beatCallback(this.step, nextTime);
+                        }
+
+                        nextTime += stepDuration;
+                        this.step++;
+                    }
+                    if (this.isPlaying) {
+                        this.timer = requestAnimationFrame(schedule);
+                    }
+                };
+                schedule();
+            }
+
+            stopBgm() {
+                this.isPlaying = false;
+                if (this.timer) cancelAnimationFrame(this.timer);
+            }
+        }
+
+        const audio = new DualThemeAudioEngine();
+
+        // 自动播放防拦策略：立即尝试自动播放，若被浏览器限制，则在页面首次任何互动瞬间解封
+        function ensureAudioAutoplay() {
+            audio.init();
+            audio.startBgm();
+            const prompt = document.getElementById('audioUnlockPrompt');
+            if (audio.ctx && audio.ctx.state === 'running') {
+                if (prompt) prompt.classList.add('hidden');
+            }
+        }
+
+        // 绑定全局捕获手势
+        const unlockAudioGestures = ['pointerdown', 'touchstart', 'click', 'keydown', 'scroll'];
+        const unlockHandler = () => {
+            audio.init();
+            if (audio.ctx && audio.ctx.state === 'suspended') {
+                audio.ctx.resume().then(() => {
+                    audio.startBgm();
+                    const prompt = document.getElementById('audioUnlockPrompt');
+                    if (prompt) prompt.classList.add('hidden');
+                });
+            } else {
+                audio.startBgm();
+                const prompt = document.getElementById('audioUnlockPrompt');
+                if (prompt) prompt.classList.add('hidden');
+            }
+        };
+
+        unlockAudioGestures.forEach(evt => {
+            window.addEventListener(evt, unlockHandler, { once: true, passive: true });
+        });
+
+        // 页面就绪后立即尝试自启
+        window.addEventListener('DOMContentLoaded', ensureAudioAutoplay);
+        window.addEventListener('load', ensureAudioAutoplay);
+
+        // 构建顶部实时霓虹音频频谱动画柱 (Visualizer)
+        const visualizerContainer = document.getElementById('visualizerContainer');
+        const visualizerBars = [];
+        for (let i = 0; i < 28; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'w-full bg-gradient-to-t from-yellow-400 to-pink-500 rounded-t transition-all duration-75';
+            bar.style.height = '15%';
+            visualizerContainer.appendChild(bar);
+            visualizerBars.push(bar);
+        }
+
+        function updateVisualizer() {
+            if (audio.analyser && audio.isPlaying && !audio.isMuted) {
+                audio.analyser.getByteFrequencyData(audio.visualizerData);
+                for (let i = 0; i < visualizerBars.length; i++) {
+                    const val = audio.visualizerData[i] || 0;
+                    const percent = Math.min(100, Math.max(15, (val / 255) * 100));
+                    visualizerBars[i].style.height = percent + '%';
+                }
+            } else {
+                for (let i = 0; i < visualizerBars.length; i++) {
+                    visualizerBars[i].style.height = (Math.sin(Date.now() * 0.005 + i) * 20 + 25) + '%';
+                }
+            }
+            requestAnimationFrame(updateVisualizer);
+        }
+        updateVisualizer();
+
+        // 1. 日漫全屏透视动态速度射线
+        const speedCanvas = document.getElementById('speedLineCanvas');
+        const speedCtx = speedCanvas.getContext('2d');
+        let scW, scH;
+
+        function resizeSpeedCanvas() {
+            scW = speedCanvas.width = window.innerWidth;
+            scH = speedCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeSpeedCanvas);
+        resizeSpeedCanvas();
+
+        function drawSpeedLines() {
+            speedCtx.clearRect(0, 0, scW, scH);
+            const cx = scW / 2;
+            const cy = scH * 0.35;
+            const count = 38;
+            speedCtx.lineWidth = 2.5;
+
+            for (let i = 0; i < count; i++) {
+                const angle = (Math.PI * 2 / count) * i + (Math.random() * 0.05);
+                const r1 = Math.random() * 180 + 150;
+                const r2 = Math.max(scW, scH) * 0.95;
+
+                const x1 = cx + Math.cos(angle) * r1;
+                const y1 = cy + Math.sin(angle) * r1;
+                const x2 = cx + Math.cos(angle) * r2;
+                const y2 = cy + Math.sin(angle) * r2;
+
+                if (audio.currentMode === 'epic') {
+                    speedCtx.strokeStyle = (i % 2 === 0) ? 'rgba(255, 210, 0, 0.09)' : 'rgba(255, 24, 60, 0.09)';
+                } else {
+                    speedCtx.strokeStyle = (i % 2 === 0) ? 'rgba(0, 255, 136, 0.14)' : 'rgba(160, 32, 240, 0.14)';
+                }
+
+                speedCtx.beginPath();
+                speedCtx.moveTo(x1, y1);
+                speedCtx.lineTo(x2, y2);
+                speedCtx.stroke();
+            }
+            requestAnimationFrame(drawSpeedLines);
+        }
+        drawSpeedLines();
+
+        // 2. 全屏多轨道自动飞掠弹幕
+        const danmakuContainer = document.getElementById('danmakuContainer');
+        const danmakuTexts = [
+            '🤡 豆包救我！', '📦 VelaJS源码一键打包！', '📢 群内贴脸开大中...',
+            '🎮 提瓦特私服无限原石战神', '🤖 换作者名字谁还不会啊',
+            '⚡ 脸皮厚度突破天际！', '💥 正义暴打即刻执行！',
+            '🤣 离开了豆包连变量名都不认得', '🏆 年度小丑终身成就奖'
+        ];
+
+        function createDanmaku() {
+            const el = document.createElement('div');
+            el.className = 'danmaku-item font-kuaile font-black text-sm sm:text-base px-3 py-1 rounded-full border-2 border-black shadow-[3px_3px_0px_#000]';
+            
+            const randomText = danmakuTexts[Math.floor(Math.random() * danmakuTexts.length)];
+            el.innerText = randomText;
+
+            const lane = Math.floor(Math.random() * 8) + 1;
+            el.style.top = (lane * 9) + 'vh';
+
+            const duration = Math.random() * 6 + 7;
+            el.style.animationDuration = duration + 's';
+
+            if (audio.currentMode === 'epic') {
+                el.style.backgroundColor = (Math.random() > 0.5) ? '#ffd200' : '#ff183c';
+                el.style.color = '#000000';
+            } else {
+                el.style.backgroundColor = '#00ff88';
+                el.style.color = '#07150c';
+            }
+
+            danmakuContainer.appendChild(el);
+            setTimeout(() => el.remove(), duration * 1000);
+        }
+        setInterval(createDanmaku, 1600);
+
+        class RhythmEngine {
+            constructor() {
+                this.canvas = document.getElementById('rhythmCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.isRunning = false;
+
+                this.lanes = [
+                    { key: 'd', label: 'D', name: '快应用盾', icon: '📁', color: '#00f0ff', glow: 'rgba(0,240,255,0.7)' },
+                    { key: 'f', label: 'F', name: '豆包截断', icon: '🤖', color: '#ffd200', glow: 'rgba(255,210,0,0.7)' },
+                    { key: 'j', label: 'J', name: '反向抽脸', icon: '🤡', color: '#ff007f', glow: 'rgba(255,0,127,0.7)' },
+                    { key: 'k', label: 'K', name: '私服炸服', icon: '🎮', color: '#ff183c', glow: 'rgba(255,24,60,0.7)' }
+                ];
+
+                this.notes = [];
+                this.particles = [];
+                this.hitLineY = 0;
+                this.noteSpeed = 360; // 平缓舒适的下落速度
+
+                this.score = 0;
+                this.combo = 0;
+                this.maxCombo = 0;
+                this.totalNotesHit = 0;
+                this.perfectCount = 0;
+                this.greatCount = 0;
+                this.missCount = 0;
+                this.feverGauge = 0;
+                this.isFever = false;
+                
+                // 源码护盾值 (100 -> 0)
+                this.shield = 100;
+
+                // DOM 引用
+                this.scoreEl = document.getElementById('gameScoreDisplay');
+                this.comboEl = document.getElementById('gameComboDisplay');
+                this.accEl = document.getElementById('gameAccDisplay');
+                this.feverBar = document.getElementById('feverBarFill');
+                this.feverText = document.getElementById('feverText');
+                this.feverOverlay = document.getElementById('feverOverlay');
+                this.judgeText = document.getElementById('judgeText');
+                this.bossHpFill = document.getElementById('bossHpFill');
+                this.bossHpText = document.getElementById('bossHpText');
+                this.playerShieldFill = document.getElementById('playerShieldFill');
+                this.playerShieldText = document.getElementById('playerShieldText');
+                this.avatarContainer = document.getElementById('avatarContainer');
+                this.avatarStatusBadge = document.getElementById('avatarStatusBadge');
+                this.gameOverModal = document.getElementById('gameOverModal');
+
+                this.lastTime = 0;
+                this.initCanvasSize();
+                window.addEventListener('resize', () => this.initCanvasSize());
+            }
+
+            initCanvasSize() {
+                const rect = this.canvas.parentElement.getBoundingClientRect();
+                this.width = this.canvas.width = rect.width;
+                this.height = this.canvas.height = rect.height;
+                this.hitLineY = this.height - 62;
+            }
+
+            start() {
+                this.initCanvasSize();
+                this.isRunning = true;
+                this.score = 0;
+                this.combo = 0;
+                this.maxCombo = 0;
+                this.perfectCount = 0;
+                this.greatCount = 0;
+                this.missCount = 0;
+                this.totalNotesHit = 0;
+                this.feverGauge = 0;
+                this.isFever = false;
+                this.shield = 100;
+                this.notes = [];
+                this.particles = [];
+                this.gameOverModal.classList.add('hidden');
+                this.updateUI();
+
+                this.lastTime = performance.now();
+                audio.startBgm((step, time) => this.onBgmStep(step, time));
+                requestAnimationFrame((t) => this.loop(t));
+            }
+
+            stop() {
+                this.isRunning = false;
+            }
+
+            onBgmStep(step) {
+                if (!this.isRunning) return;
+                const pat = (step / 4) % 16;
+                let targetLanes = [];
+
+                if (pat === 0 || pat === 8) {
+                    targetLanes = [0, 3];
+                } else if (pat === 4 || pat === 12) {
+                    targetLanes = [1, 2];
+                } else if (pat % 2 === 0) {
+                    targetLanes = [Math.floor(Math.random() * 4)];
+                }
+
+                targetLanes.forEach(laneIdx => {
+                    this.notes.push({
+                        lane: laneIdx,
+                        y: -30,
+                        radius: 20,
+                        color: this.lanes[laneIdx].color,
+                        glow: this.lanes[laneIdx].glow,
+                        icon: this.lanes[laneIdx].icon,
+                        judged: false
+                    });
+                });
+            }
+
+            loop(currentTime) {
+                if (!this.isRunning) return;
+                const dt = Math.min((currentTime - this.lastTime) / 1000, 0.1);
+                this.lastTime = currentTime;
+
+                this.update(dt);
+                this.render();
+
+                requestAnimationFrame((t) => this.loop(t));
+            }
+
+            update(dt) {
+                for (let i = this.notes.length - 1; i >= 0; i--) {
+                    const note = this.notes[i];
+                    note.y += this.noteSpeed * dt;
+
+                    if (note.y > this.hitLineY + 65 && !note.judged) {
+                        note.judged = true;
+                        this.handleJudge('MISS', note.lane);
+                        this.notes.splice(i, 1);
+                    }
+                }
+
+                for (let i = this.particles.length - 1; i >= 0; i--) {
+                    const p = this.particles[i];
+                    p.x += p.vx * dt;
+                    p.y += p.vy * dt;
+                    p.alpha -= p.decay * dt;
+                    p.scale = Math.max(0, p.scale - dt * 0.8);
+                    if (p.alpha <= 0) this.particles.splice(i, 1);
+                }
+            }
+
+            render() {
+                const ctx = this.ctx;
+                const w = this.width;
+                const h = this.height;
+                const laneW = w / 4;
+
+                ctx.clearRect(0, 0, w, h);
+
+                for (let i = 0; i < 4; i++) {
+                    const x = i * laneW;
+                    ctx.fillStyle = (i % 2 === 0) ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.28)';
+                    ctx.fillRect(x, 0, laneW, h);
+
+                    ctx.strokeStyle = (audio.currentMode === 'epic') ? 'rgba(255, 210, 0, 0.2)' : 'rgba(0, 255, 136, 0.25)';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, h);
+                    ctx.stroke();
+                }
+
+                ctx.save();
+                ctx.shadowColor = (audio.currentMode === 'epic') ? '#00f0ff' : '#00ff88';
+                ctx.shadowBlur = 15;
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.moveTo(0, this.hitLineY);
+                ctx.lineTo(w, this.hitLineY);
+                ctx.stroke();
+                ctx.restore();
+
+                for (let i = 0; i < 4; i++) {
+                    const cx = i * laneW + laneW / 2;
+                    ctx.strokeStyle = this.lanes[i].color;
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.arc(cx, this.hitLineY, 22, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+
+                for (let i = 0; i < this.notes.length; i++) {
+                    const n = this.notes[i];
+                    const cx = n.lane * laneW + laneW / 2;
+
+                    ctx.save();
+                    ctx.shadowColor = n.glow;
+                    ctx.shadowBlur = 20;
+
+                    ctx.fillStyle = n.color;
+                    ctx.beginPath();
+                    ctx.arc(cx, n.y, n.radius, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.strokeStyle = '#000000';
+                    ctx.lineWidth = 3;
+                    ctx.stroke();
+
+                    ctx.font = '16px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(n.icon, cx, n.y);
+                    ctx.restore();
+                }
+
+                for (let i = 0; i < this.particles.length; i++) {
+                    const p = this.particles[i];
+                    ctx.save();
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius * p.scale, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            hitLane(laneIndex) {
+                if (!this.isRunning) return;
+
+                const laneW = this.width / 4;
+                const cx = laneIndex * laneW + laneW / 2;
+
+                let targetNote = null;
+                let minDist = Infinity;
+
+                for (let i = 0; i < this.notes.length; i++) {
+                    const n = this.notes[i];
+                    if (n.lane === laneIndex && !n.judged) {
+                        const dist = Math.abs(n.y - this.hitLineY);
+                        if (dist < minDist) {
+                            minDist = dist;
+                            targetNote = n;
+                        }
+                    }
+                }
+
+                if (targetNote && minDist < 125) {
+                    targetNote.judged = true;
+                    const idx = this.notes.indexOf(targetNote);
+                    if (idx !== -1) this.notes.splice(idx, 1);
+
+                    if (minDist <= 45) {
+                        this.handleJudge('PERFECT', laneIndex, cx, this.hitLineY);
+                    } else {
+                        this.handleJudge('GREAT', laneIndex, cx, this.hitLineY);
+                    }
+                }
+            }
+
+            handleJudge(type, laneIndex, x, y) {
+                const multiplier = this.isFever ? 2 : 1;
+
+                if (type === 'PERFECT') {
+                    audio.playHitPerfect();
+                    this.score += 300 * multiplier;
+                    this.combo++;
+                    this.perfectCount++;
+                    this.totalNotesHit++;
+                    this.increaseFever(6);
+                    this.restoreShield(5);
+                    this.showJudgeText('💥 PERFECT!!', '#ffd200');
+                    this.spawnParticles(x, y, this.lanes[laneIndex].color, 20);
+                    this.damageBoss(1.2);
+                } else if (type === 'GREAT') {
+                    audio.playHitGreat();
+                    this.score += 150 * multiplier;
+                    this.combo++;
+                    this.greatCount++;
+                    this.totalNotesHit++;
+                    this.increaseFever(3);
+                    this.restoreShield(2);
+                    this.showJudgeText('⚡ GREAT!', '#00f0ff');
+                    this.spawnParticles(x, y, this.lanes[laneIndex].color, 10);
+                    this.damageBoss(0.6);
+                } else {
+                    // MISS: 扣除源码护盾 18%
+                    audio.playHitMiss();
+                    this.combo = 0;
+                    this.missCount++;
+                    this.totalNotesHit++;
+                    this.feverGauge = Math.max(0, this.feverGauge - 15);
+                    this.isFever = false;
+                    this.feverOverlay.style.opacity = '0';
+                    this.avatarContainer.classList.remove('fever-avatar');
+                    this.showJudgeText('🤡 贴脸漏按!', '#ff183c');
+                    this.drainShield(18);
+                }
+
+                if (this.combo > this.maxCombo) this.maxCombo = this.combo;
+                this.updateUI();
+            }
+
+            restoreShield(amount) {
+                this.shield = Math.min(100, this.shield + amount);
+            }
+
+            drainShield(amount) {
+                this.shield = Math.max(0, this.shield - amount);
+                if (this.shield <= 0) {
+                    this.triggerGameOver();
+                }
+            }
+
+            triggerGameOver() {
+                this.stop();
+                audio.play8BitGameOver();
+
+                this.avatarStatusBadge.innerText = 'STATUS: 源码失守！已被破解！';
+                this.avatarStatusBadge.className = 'absolute bottom-2 bg-red-600 text-white border-2 border-black text-[11px] font-black px-3 py-0.5 rounded-full font-mono animate-pulse';
+
+                setTimeout(() => {
+                    this.gameOverModal.classList.remove('hidden');
+                }, 350);
+            }
+
+            increaseFever(amount) {
+                this.feverGauge = Math.min(100, this.feverGauge + amount);
+                if (this.feverGauge >= 100 && !this.isFever) {
+                    this.isFever = true;
+                    this.feverOverlay.style.opacity = '1';
+                    this.avatarContainer.classList.add('fever-avatar');
+                    this.avatarStatusBadge.innerText = 'STATUS: 遭遇节奏暴打！破防！';
+                    this.avatarStatusBadge.className = 'absolute bottom-2 bg-yellow-400 text-black border-2 border-black text-[11px] font-black px-3 py-0.5 rounded-full font-mono animate-bounce';
+                }
+            }
+
+            damageBoss(percent) {
+                const currentWidth = parseFloat(this.bossHpFill.style.width || '100');
+                const nextWidth = Math.max(0, currentWidth - percent * 0.4);
+                this.bossHpFill.style.width = nextWidth + '%';
+                if (nextWidth <= 0) {
+                    this.bossHpText.innerText = '脸皮归零！(0 HP)';
+                } else {
+                    this.bossHpText.innerText = `嚣张值: ${Math.floor(nextWidth)}%`;
+                }
+            }
+
+            spawnParticles(x, y, color, count) {
+                for (let i = 0; i < count; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 200 + 50;
+                    this.particles.push({
+                        x: x,
+                        y: y,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed,
+                        radius: Math.random() * 4 + 3,
+                        color: color,
+                        alpha: 1.0,
+                        decay: Math.random() * 1.5 + 1.2,
+                        scale: 1.0
+                    });
+                }
+            }
+
+            showJudgeText(text, color) {
+                this.judgeText.innerText = text;
+                this.judgeText.style.color = color;
+                this.judgeText.style.transform = `scale(1.35) rotate(${(Math.random() * 16 - 8)}deg)`;
+                setTimeout(() => {
+                    this.judgeText.style.transform = 'scale(0)';
+                }, 280);
+            }
+
+            updateUI() {
+                this.scoreEl.innerText = this.score.toString().padStart(6, '0');
+                this.comboEl.innerText = this.combo;
+                this.feverBar.style.width = this.feverGauge + '%';
+                this.feverText.innerText = Math.floor(this.feverGauge) + '%';
+
+                this.playerShieldFill.style.width = this.shield + '%';
+                if (this.shield > 50) {
+                    this.playerShieldFill.className = 'h-full bg-gradient-to-r from-cyan-400 via-green-400 to-yellow-300 rounded-full transition-all duration-200';
+                    this.playerShieldText.innerText = `${Math.floor(this.shield)}% (安全)`;
+                } else if (this.shield > 25) {
+                    this.playerShieldFill.className = 'h-full bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full transition-all duration-200';
+                    this.playerShieldText.innerText = `${Math.floor(this.shield)}% (警戒)`;
+                } else {
+                    this.playerShieldFill.className = 'h-full bg-gradient-to-r from-orange-500 to-red-600 rounded-full transition-all duration-200';
+                    this.playerShieldText.innerText = `${Math.floor(this.shield)}% (濒死)`;
+                }
+
+                const totalJudged = this.perfectCount + this.greatCount + this.missCount;
+                if (totalJudged > 0) {
+                    const acc = ((this.perfectCount * 1.0 + this.greatCount * 0.6) / totalJudged) * 100;
+                    this.accEl.innerText = acc.toFixed(1) + '%';
+                } else {
+                    this.accEl.innerText = '100.0%';
+                }
+            }
+        }
+
+        const rhythm = new RhythmEngine();
+
+        const btnStartGame = document.getElementById('btnStartGame');
+        const gameStartText = document.getElementById('gameStartText');
+        const gameStartIcon = document.getElementById('gameStartIcon');
+        const btnResetGame = document.getElementById('btnResetGame');
+        const rhythmResultModal = document.getElementById('rhythmResultModal');
+        const closeRhythmResultBtn = document.getElementById('closeRhythmResultBtn');
+        const btnRetryGame = document.getElementById('btnRetryGame');
+        const btnCloseGameOver = document.getElementById('btnCloseGameOver');
+
+        btnStartGame.addEventListener('click', () => {
+            if (!rhythm.isRunning) {
+                rhythm.start();
+                gameStartText.innerText = '暂停保卫 (PAUSE)';
+                gameStartIcon.innerText = '⏸️';
+            } else {
+                rhythm.stop();
+                gameStartText.innerText = '继续保卫 (RESUME)';
+                gameStartIcon.innerText = '▶️';
+                showBattleReport();
+            }
+        });
+
+        btnResetGame.addEventListener('click', () => {
+            rhythm.stop();
+            rhythm.start();
+            gameStartText.innerText = '暂停保卫 (PAUSE)';
+            gameStartIcon.innerText = '⏸️';
+        });
+
+        btnRetryGame.addEventListener('click', () => {
+            document.getElementById('gameOverModal').classList.add('hidden');
+            rhythm.start();
+            gameStartText.innerText = '暂停保卫 (PAUSE)';
+            gameStartIcon.innerText = '⏸️';
+        });
+
+        btnCloseGameOver.addEventListener('click', () => {
+            document.getElementById('gameOverModal').classList.add('hidden');
+        });
+
+        // 音乐风格切换 (超燃史诗处刑曲 VS 极致阴间送葬曲)
+        const btnToggleMusicStyle = document.getElementById('btnToggleMusicStyle');
+        const musicStyleIcon = document.getElementById('musicStyleIcon');
+        const musicStyleText = document.getElementById('musicStyleText');
+        const mainHeroTitle = document.getElementById('mainHeroTitle');
+        const bannerTag = document.getElementById('bannerTag');
+
+        btnToggleMusicStyle.addEventListener('click', () => {
+            if (audio.currentMode === 'epic') {
+                audio.setMode('spooky');
+                document.body.classList.add('theme-underworld');
+                musicStyleIcon.innerText = '👻';
+                musicStyleText.innerText = '风格：极致阴间送葬曲 [点击切超燃]';
+                mainHeroTitle.innerText = '赛博白事 · 沉痛吊唁';
+                bannerTag.innerHTML = '<span class="font-kuaile font-black text-lg sm:text-2xl tracking-widest">⚰️ 提瓦特牢大白事哀悼大典 · 悲 ⚰️</span>';
+                spawnPaperCoins(18);
+            } else {
+                audio.setMode('epic');
+                document.body.classList.remove('theme-underworld');
+                musicStyleIcon.innerText = '🔥';
+                musicStyleText.innerText = '风格：超燃史诗处刑曲 [点击切阴间]';
+                mainHeroTitle.innerText = '小丑之王 · 降临';
+                bannerTag.innerHTML = '<span class="font-kuaile font-black text-lg sm:text-2xl tracking-widest">💥 提瓦特私服白嫖盛典 · 史诗级翻车通缉令 💥</span>';
+            }
+        });
+
+        // 静音/播放切换
+        const btnToggleBgmPlay = document.getElementById('btnToggleBgmPlay');
+        const bgmPlayIcon = document.getElementById('bgmPlayIcon');
+        const bgmPlayText = document.getElementById('bgmPlayText');
+
+        btnToggleBgmPlay.addEventListener('click', () => {
+            audio.init();
+            const muted = audio.toggleMute();
+            if (muted) {
+                bgmPlayIcon.innerText = '🔈';
+                bgmPlayText.innerText = '开启';
+            } else {
+                bgmPlayIcon.innerText = '🔊';
+                bgmPlayText.innerText = '静音';
+            }
+        });
+
+        // 激光眼开闭
+        const btnToggleLaser = document.getElementById('btnToggleLaser');
+        const laserEyeLeft = document.getElementById('laserEyeLeft');
+        const laserEyeRight = document.getElementById('laserEyeRight');
+        let laserOn = false;
+
+        btnToggleLaser.addEventListener('click', () => {
+            laserOn = !laserOn;
+            if (laserOn) {
+                laserEyeLeft.classList.remove('hidden');
+                laserEyeRight.classList.remove('hidden');
+            } else {
+                laserEyeLeft.classList.add('hidden');
+                laserEyeRight.classList.add('hidden');
+            }
+        });
+
+        // 键位映射
+        const keyMap = { 'KeyD': 0, 'KeyF': 1, 'KeyJ': 2, 'KeyK': 3 };
+        const arcadeButtons = document.querySelectorAll('.arcade-key');
+
+        window.addEventListener('keydown', (e) => {
+            if (e.code in keyMap && !e.repeat) {
+                const lane = keyMap[e.code];
+                rhythm.hitLane(lane);
+                arcadeButtons[lane].classList.add('arcade-key-active');
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (e.code in keyMap) {
+                const lane = keyMap[e.code];
+                arcadeButtons[lane].classList.remove('arcade-key-active');
+            }
+        });
+
+        arcadeButtons.forEach(btn => {
+            const lane = parseInt(btn.dataset.lane);
+            const trigger = (e) => {
+                e.preventDefault();
+                rhythm.hitLane(lane);
+                btn.classList.add('arcade-key-active');
+                setTimeout(() => btn.classList.remove('arcade-key-active'), 120);
+            };
+            btn.addEventListener('touchstart', trigger, { passive: false });
+            btn.addEventListener('mousedown', trigger);
+        });
+
+        function showBattleReport() {
+            const totalJudged = rhythm.perfectCount + rhythm.greatCount + rhythm.missCount;
+            const acc = totalJudged > 0 
+                ? ((rhythm.perfectCount * 1.0 + rhythm.greatCount * 0.6) / totalJudged) * 100 
+                : 0;
+
+            document.getElementById('resultScore').innerText = rhythm.score;
+            document.getElementById('resultMaxCombo').innerText = rhythm.maxCombo;
+            document.getElementById('resultAcc').innerText = acc.toFixed(1) + '%';
+            document.getElementById('resultRemainShield').innerText = Math.floor(rhythm.shield) + '%';
+
+            const stamp = document.getElementById('resultRankStamp');
+            const title = document.getElementById('resultRankTitle');
+            const comment = document.getElementById('resultComment');
+
+            if (acc >= 90 && rhythm.score >= 4000) {
+                stamp.innerText = 'SSS';
+                stamp.className = 'font-bangers text-7xl sm:text-8xl text-yellow-400 drop-shadow-[5px_5px_0px_#ff183c] transform -rotate-6';
+                title.innerText = '【提瓦特开源守护战神】';
+                comment.innerText = '“神级防守！Lh杨的脸皮已成粉末，原神私服当场炸服跑路！”';
+            } else if (acc >= 70) {
+                stamp.innerText = 'S';
+                stamp.className = 'font-bangers text-7xl sm:text-8xl text-cyan-400 drop-shadow-[5px_5px_0px_#000] transform rotate-3';
+                title.innerText = '【正义执行官】';
+                comment.innerText = '“重拳出击！Lh杨被连抽几十巴掌，哭着回去找豆包诉苦！”';
+            } else {
+                stamp.innerText = 'B';
+                stamp.className = 'font-bangers text-7xl sm:text-8xl text-purple-400 drop-shadow-[5px_5px_0px_#000] transform rotate-6';
+                title.innerText = '【社区守卫兵】';
+                comment.innerText = '“勉强守住了源码，赶快换上阴间模式给他送终吧！”';
+            }
+
+            rhythmResultModal.classList.remove('hidden');
+        }
+
+        closeRhythmResultBtn.addEventListener('click', () => {
+            rhythmResultModal.classList.add('hidden');
+        });
+
+        // 阴间纸钱生成
+        function spawnPaperCoins(count) {
+            for (let i = 0; i < count; i++) {
+                const coin = document.createElement('div');
+                coin.className = 'paper-coin';
+                coin.style.left = (Math.random() * 95) + 'vw';
+                coin.style.top = '-20px';
+                coin.style.animationDuration = (Math.random() * 3 + 2.5) + 's';
+                coin.innerHTML = `
+                    <div style="width: 28px; height: 28px; border-radius: 50%; background: #e5e7eb; border: 2px solid #9ca3af; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(0,255,136,0.5);">
+                        <div style="width: 8px; height: 8px; border: 1.5px solid #6b7280; background: transparent;"></div>
+                    </div>
+                `;
+                document.body.appendChild(coin);
+                setTimeout(() => coin.remove(), 5500);
+            }
+        }
+
+        // 耳光狂抽
+        let slapCount = 0;
+        const slapDisplay = document.getElementById('slapCountDisplay');
+        const btnSlap = document.getElementById('btnSlap');
+        const avatarInteractArea = document.getElementById('avatarInteractArea');
+        const slapFxContainer = document.getElementById('slapFxContainer');
+        const comicSounds = ['POW!', '啪！！', 'SMACK!', '重拳!', '巴掌!', '大快人心!', 'BAM!'];
+
+        function triggerSlap(e) {
+            slapCount++;
+            slapDisplay.innerText = slapCount;
+            audio.playSlapSfx();
+
+            document.body.classList.remove('slap-active');
+            void document.body.offsetWidth;
+            document.body.classList.add('slap-active');
+
+            rhythm.damageBoss(1.5);
+
+            const x = e ? e.clientX : window.innerWidth / 2;
+            const y = e ? e.clientY : window.innerHeight * 0.35;
+
+            const fx = document.createElement('div');
+            const soundWord = comicSounds[Math.floor(Math.random() * comicSounds.length)];
+            const randomRotate = (Math.random() * 30 - 15);
+            const randomColor = (audio.currentMode === 'epic') ? (Math.random() > 0.5 ? '#ffd200' : '#ff183c') : '#00ff88';
+
+            fx.className = 'fixed font-bangers text-4xl sm:text-6xl font-black pointer-events-none z-50 animate-pow drop-shadow-[4px_4px_0px_#000]';
+            fx.style.left = (x - 60) + 'px';
+            fx.style.top = (y - 50) + 'px';
+            fx.style.color = randomColor;
+            fx.style.transform = `rotate(${randomRotate}deg)`;
+            fx.innerText = soundWord;
+
+            slapFxContainer.appendChild(fx);
+
+            setTimeout(() => {
+                fx.style.transition = 'all 0.5s ease-out';
+                fx.style.opacity = '0';
+                fx.style.transform = `translateY(-60px) scale(1.4) rotate(${randomRotate}deg)`;
+                setTimeout(() => fx.remove(), 500);
+            }, 300);
+        }
+
+        btnSlap.addEventListener('click', triggerSlap);
+        avatarInteractArea.addEventListener('click', (e) => {
+            if (e.target !== avatarFileInput) triggerSlap(e);
+        });
+
+        // 头像拖拽上传
+        const avatarFileInput = document.getElementById('avatarFileInput');
+        const avatarImg = document.getElementById('avatarImg');
+        const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+
+        avatarPlaceholder.addEventListener('click', (e) => {
+            e.stopPropagation();
+            avatarFileInput.click();
+        });
+
+        avatarFileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) handleAvatarUpload(file);
+        });
+
+        avatarInteractArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            avatarInteractArea.classList.add('scale-105');
+        });
+        avatarInteractArea.addEventListener('dragleave', () => {
+            avatarInteractArea.classList.remove('scale-105');
+        });
+        avatarInteractArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            avatarInteractArea.classList.remove('scale-105');
+            if (e.dataTransfer.files.length > 0) {
+                handleAvatarUpload(e.dataTransfer.files[0]);
+            }
+        });
+
+        function handleAvatarUpload(file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                avatarImg.src = event.target.result;
+                avatarImg.classList.remove('hidden');
+                avatarPlaceholder.classList.add('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // 提瓦特十连抽祈愿
+        const btnGacha = document.getElementById('btnGacha');
+        const gachaModal = document.getElementById('gachaModal');
+        const closeGachaBtn = document.getElementById('closeGachaBtn');
+        const gachaCardsGrid = document.getElementById('gachaCardsGrid');
+        const meteorAnimLayer = document.getElementById('meteorAnimLayer');
+
+        const gachaPool = [
+            { name: '0.5★ 幺幺·盗包真君', star: '⭐⭐⭐⭐⭐ (伪)', color: 'from-yellow-400 to-amber-600', icon: '🤡' },
+            { name: '0.5★ 豆包逆向秘籍', star: '⭐', color: 'from-blue-400 to-indigo-600', icon: '🤖' },
+            { name: '0.5★ 纯手工修改包名', star: '⭐', color: 'from-gray-400 to-slate-600', icon: '📂' },
+            { name: '0.5★ 原神私服超级外挂', star: '⭐', color: 'from-purple-400 to-pink-600', icon: '👑' },
+            { name: '0.5★ 贴脸大喇叭', star: '⭐', color: 'from-red-400 to-rose-600', icon: '📢' },
+            { name: '0.5★ 烂番茄花圈', star: '⭐', color: 'from-green-400 to-emerald-600', icon: '🍅' },
+        ];
+
+        btnGacha.addEventListener('click', () => {
+            audio.playGachaGoldSfx();
+
+            meteorAnimLayer.innerHTML = '';
+            for (let i = 0; i < 5; i++) {
+                const streak = document.createElement('div');
+                streak.className = 'absolute w-72 h-1.5 bg-gradient-to-r from-transparent via-yellow-300 to-white rounded-full';
+                streak.style.top = (Math.random() * 40) + 'vh';
+                streak.style.left = (Math.random() * 30 + 70) + 'vw';
+                streak.style.transform = 'rotate(-45deg)';
+                meteorAnimLayer.appendChild(streak);
+            }
+
+            gachaCardsGrid.innerHTML = '';
+            for (let i = 0; i < 10; i++) {
+                const item = (i === 0) ? gachaPool[0] : gachaPool[Math.floor(Math.random() * gachaPool.length)];
+                const card = document.createElement('div');
+                card.className = `p-3 rounded-2xl bg-gradient-to-b ${item.color} text-black border-2 border-black flex flex-col items-center justify-between shadow-md transform hover:scale-105 transition-transform`;
+                card.innerHTML = `
+                    <div class="text-3xl mb-1">${item.icon}</div>
+                    <div class="font-kuaile font-black text-xs sm:text-sm text-center">${item.name}</div>
+                    <div class="text-[10px] font-mono font-bold text-yellow-950 mt-1">${item.star}</div>
+                `;
+                gachaCardsGrid.appendChild(card);
+            }
+
+            setTimeout(() => {
+                gachaModal.classList.remove('hidden');
+            }, 400);
+        });
+
+        closeGachaBtn.addEventListener('click', () => {
+            gachaModal.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
